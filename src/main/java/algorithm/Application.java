@@ -1,14 +1,10 @@
 package algorithm;
-
-import algorithm.domain.BOJ_11659;
-
-import java.io.IOException;
-
+import algorithm.domain.*;
 public class Application {
     /**
      * domain 내의 알고리즘 문제 클래스를 생성하여 실행
      **/
-    public static void main(String[] args) throws IOException {
-        new BOJ_11659();
+    public static void main(String[] args)  throws Exception{
+        SWEA_1206 sol=new SWEA_1206();
     }
 }
