@@ -9,7 +9,6 @@ public class SWEA_1206 {
     static int[] height;
 
     public SWEA_1206() {
-//        System.setIn(new FileInputStream("input.txt"));
         Scanner sc = new Scanner(System.in);
 
         for (int test_case = 1; test_case <= T; test_case++) {
