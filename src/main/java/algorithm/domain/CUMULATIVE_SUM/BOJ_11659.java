@@ -1,4 +1,4 @@
-package algorithm.domain;
+package algorithm.domain.CUMULATIVE_SUM;
 
 import java.util.ArrayList;
 import java.util.List;
