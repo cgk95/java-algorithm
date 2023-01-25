@@ -1,4 +1,4 @@
-package algorithm.domain.BFS;
+package algorithm.domain.GRAPH;
 
 import algorithm.Application;
 
