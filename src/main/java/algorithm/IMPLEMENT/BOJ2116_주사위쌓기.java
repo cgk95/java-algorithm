@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class BOJ_2116 {
+public class BOJ2116_주사위쌓기 {
 
-    public BOJ_2116() throws IOException {
+    public BOJ2116_주사위쌓기() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Integer diceNumber = isdigit(br.readLine()); // 입력이 10^12를 넘어가는 범위면?
         int[][] dice = new int[diceNumber][6];

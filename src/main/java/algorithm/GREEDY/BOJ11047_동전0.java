@@ -8,8 +8,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class BOJ_11047 {
-    public BOJ_11047() throws IOException {
+public class BOJ11047_동전0 {
+    public BOJ11047_동전0() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         List<Integer> coin = new ArrayList<>();
         int answer = 0;
