@@ -5,6 +5,102 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solution {
+    public int solution(int[] array, int n) {
+        return Arrays.stream(Arrays.stream(array)
+                        .sorted() // 입력 스트림을 먼저 오름차순 정렬(거리가 같으면 작은 수가 나오도록 하기 위해)
+                        .mapToObj(i -> new int[]{i, Math.abs(n - i)}) //숫자와 절대값(=거리)를 묶어서 매핑
+                        .min(Comparator.comparing(o -> o[1])) // 절대값(=거리)를 기준으로 정렬하여 최소값을 찾고
+                        .orElseThrow()) // 예외가 있으면 던져주고
+                .toArray()[0]; // 값 반환
+
+    }
+
+    public int triAngleSample02(int[] sides) {
+        int answer = 0;
+        int b = sides[0] + sides[1];
+        int a = Math.abs(sides[0] - sides[1]);
+        for (int i = 1; i <= 1999; i++) {
+            if (a < i && i < b) {
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    public int triAngleSample01(int[] sides) {
+        int answer = 2;
+        int[] sorted = Arrays.stream(sides).sorted().toArray();
+        if (sorted[0] + sorted[1] > sorted[2]) {
+            answer = 1;
+        }
+        return answer;
+    }
+
+    public String stringSample02(String my_string) {
+        LinkedHashSet<String> lhs = new LinkedHashSet<>(List.of(my_string.split("")));
+        String answer = "";
+        for (Object o : lhs) {
+            answer = answer.concat(String.valueOf(o));
+        }
+        return answer;
+    }
+
+    public int[] stringSample(String[] strlist) {
+        return Arrays.stream(strlist).mapToInt(String::length).toArray();
+    }
+
+    public int stkSample(String s) {
+        Deque<Integer> stk = new ArrayDeque<>();
+        String[] input = s.split(" ");
+        for (String str : input) {
+            if (!stk.isEmpty() && str.equals("Z")) {
+                stk.pollLast();
+                continue;
+            }
+            stk.addLast(Integer.parseInt(str));
+        }
+        return stk.stream().reduce(0, Integer::sum);
+    }
+
+    public int[] soinsuBunhaeSample(int number) {
+        HashSet<Integer> arr = new HashSet<>(); // 뽑을때마다 다르게 나온다!!
+        int pvt = 2;
+        while (number != 1) {
+            if (number % pvt == 0) {
+                arr.add(pvt);
+                number = number / pvt;
+                continue;
+            }
+            pvt++;
+        }
+        return Arrays.stream(arr.toArray()).mapToInt(o -> (Integer) o).sorted().toArray();
+    }
+
+    public int myStringSample(String my_string) {
+        int answer = 0;
+        for (char c : my_string.toCharArray()) {
+            if (48 <= c && c <= 57) {
+                answer += Integer.parseInt(String.valueOf(c));
+            }
+        }
+        return answer;
+    }
+
+    public int[] useReplaceAllSample(String my_string) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (char c : my_string.toCharArray()) {
+            if (48 <= c && c <= 57) {
+                numbers.add(Integer.parseInt(String.valueOf(c)));
+            }
+        }
+        numbers.sort(Integer::compareTo);
+        int[] answer = new int[numbers.size()];
+        for (int i = 0; i < numbers.size(); i++) {
+            answer[i] = numbers.get(i);
+        }
+        return answer;
+    }
+
     public int factSample(int n) {
         int answer = 0;
         for (int i = 1; i <= 10; i++) {
@@ -21,37 +117,40 @@ public class Solution {
         if (number > 1) return number * factorial(number - 1);
         return number;
     }
+
     public int sortSample02(int[] numbers) {
         Integer[] num = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
-        Arrays.sort(num,((o1, o2) -> o2-o1));
-        return num[0]*num[1];
+        Arrays.sort(num, ((o1, o2) -> o2 - o1));
+        return num[0] * num[1];
     }
+
     public int sosuSample(int n) {
-        int answer=0;
-        int[] sosuTable=new int[n+1];
-        findSosu(sosuTable,n);
-        for(int num:sosuTable){
-            if(num==1){
+        int answer = 0;
+        int[] sosuTable = new int[n + 1];
+        findSosu(sosuTable, n);
+        for (int num : sosuTable) {
+            if (num == 1) {
                 answer++;
             }
         }
-        if(n>=4){
-            return answer+1;
+        if (n >= 4) {
+            return answer + 1;
         }
         return answer;
     }
 
-    private void findSosu(int[] arr,int n){
-        for(int i=2;i<=(int)Math.sqrt(n)+1;i++){
-            if(arr[i]==0){
-                int j=2;
-                while(i*j<n){
-                    arr[i*j]=1;
+    private void findSosu(int[] arr, int n) {
+        for (int i = 2; i <= (int) Math.sqrt(n) + 1; i++) {
+            if (arr[i] == 0) {
+                int j = 2;
+                while (i * j < n) {
+                    arr[i * j] = 1;
                     j++;
                 }
             }
         }
     }
+
     public int[] arrayRL(int[] numbers, String direction) { // 이거 옮기기
         LinkedList<Integer> list = (LinkedList<Integer>) Arrays.stream(numbers).boxed().collect(Collectors.toList());
         for (int num : numbers) {
@@ -69,6 +168,7 @@ public class Solution {
         }
         return numbers;
     }
+
     public int[] arrayRLHeah(int[] numbers, String direction) {
         List<Integer> list = Arrays.stream(numbers).boxed().collect(Collectors.toList());
 
