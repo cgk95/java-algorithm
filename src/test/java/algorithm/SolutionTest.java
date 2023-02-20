@@ -13,17 +13,18 @@ public class SolutionTest {
     @Test
     @DisplayName("테스트케이스 01")
     void test01(){
-        assertThat(sol.solution(new int[] {1,2,28},20)).isEqualTo(28);
+        assertThat(sol.solution(
+                "1101")).isEqualTo(6);
     }
     @Test
     @DisplayName("테스트케이스 02")
     void test02(){
-        assertThat(sol.solution(new int[]{10,11,12},13)).isEqualTo(12);
+//        assertThat(sol.solution(5)).isEqualTo(120);
     }
     @Test
     @DisplayName("테스트케이스 03")
     void test03(){
-        assertThat(sol.solution(new int[]{7,13,19},10)).isEqualTo(7);
+//        assertThat(sol.solution(0)).isEqualTo(1);
     }
 
 }

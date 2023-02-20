@@ -4,15 +4,142 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.groupingBy;
+
 public class Solution {
-    public int solution(int[] array, int n) {
+    public int solution(String S) {
+        int num = Integer.parseInt(S, 2);
+        int answer = 0;
+        while (num != 0) {
+            if (num % 2 == 1) {
+                num -= 1;
+            } else {
+                num = num >> 1;
+            }
+            answer++;
+        }
+        return answer;
+    }
+
+    public int stremaGroupingSample(String s) {
+        return Arrays.stream(s.split("")).collect(groupingBy(Integer::parseInt))
+                .entrySet().stream().map(o -> new int[]{o.getValue().size(), o.getKey()})
+                .max(((o1, o2) -> {
+                    if (o1[0] == o2[0]) {
+                        return o2[1] - o1[1];
+                    }
+                    return o1[0] - o2[0];
+                })).orElseThrow()[1];
+    }
+
+    /**
+     * 스트림으로 인덱스에 접근하면서 2중 루프를 돌리는 법.
+     *
+     * @param A 소스 배열
+     * @return 정수
+     */
+    public int stream2DimensionLoop(int[] A) {
+        return IntStream.range(0, A.length - 2)
+                .flatMap(i -> IntStream.range(i + 1, A.length).map(j -> A[j] - A[i]))
+                .max()
+                .orElse(0);
+    }
+
+    public int stringStreamSample04(String before, String after) {
+        return Arrays.stream(before.split(""))
+                .sorted()
+                .collect(Collectors.joining())
+                .equals(Arrays.stream(after.split(""))
+                        .sorted()
+                        .collect(Collectors.joining())) ? 1 : 0;
+    }
+
+    public String[] stringStreamSample03_2(String myStr, int n) {
+        return IntStream.range(0, myStr.length() / n + (myStr.length() % n > 0 ? 1 : 0))
+                .mapToObj(i -> i == myStr.length() / n ? myStr.substring(i * n) : myStr.substring(i * n, (i + 1) * n))
+                .toArray(String[]::new);
+    }
+
+    public String[] stringStreamSample03_1(String my_str, int n) {
+        ArrayList<String> answer = new ArrayList<>();
+        for (int i = 0; i < my_str.length() - n; i += n) {
+            answer.add(my_str.substring(i, i + n));
+        }
+
+        if ((my_str.length() + 1) % n != 0) {
+            answer.add(my_str.substring(n * answer.size()));
+        }
+        return answer.toArray(String[]::new);
+    }
+
+    public int stringStreamSample02(int[] array) {
+        return Arrays.stream(array)
+                .map(i -> {
+                    int count = 0;
+                    for (Character c : String.valueOf(i).toCharArray()) {
+                        if (c.equals('7')) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }).sum();
+    }
+
+    public String stringStreamSample01(String my_string) {
+        return Arrays.stream(my_string.split(""))
+                .map(s -> s.toLowerCase())
+                .sorted()
+                .collect(Collectors.joining());
+    }
+
+    public String[] OXstreamSample02(String[] quiz) {
+        return Arrays.stream(quiz).map(s -> {
+            String[] arr = s.trim().split(" ");
+            return arr[1].equals("+") && Integer.parseInt(arr[0]) + Integer.parseInt(arr[2]) == Integer.parseInt(arr[4]) || Integer.parseInt(arr[0]) - Integer.parseInt(arr[2]) == Integer.parseInt(arr[4]) ? "O" : "X";
+        }).toArray(String[]::new);
+    }
+
+    public String[] OXstreamSample(String[] quiz) {
+        return Arrays.stream(quiz).map(o -> {
+            String[] str = o.replaceAll("- ", "-")
+                    .replaceAll("= ", "")
+                    .replaceAll("[+] ", "").split(" ");
+            int[] numbers = Arrays.stream(str).mapToInt(Integer::parseInt).toArray();
+            if (numbers[0] + numbers[1] == numbers[2]) {
+                return "O";
+            }
+            return "X";
+        }).toArray(String[]::new);
+    }
+
+    public int opSample01(String my_string) {
+        String[] input = my_string.split(" ");
+        int answer = Integer.parseInt(input[0]);
+        boolean flag = true;
+        for (int i = 1; i < input.length; i++) {
+            if (input[i].equals("+")) {
+                flag = true;
+            } else if (input[i].equals("-")) {
+                flag = false;
+            } else {
+                int num = Integer.parseInt(input[i]);
+                if (flag) {
+                    answer += num;
+                } else {
+                    answer -= num;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public int streamSample07(int[] array, int n) {
         return Arrays.stream(Arrays.stream(array)
                         .sorted() // 입력 스트림을 먼저 오름차순 정렬(거리가 같으면 작은 수가 나오도록 하기 위해)
                         .mapToObj(i -> new int[]{i, Math.abs(n - i)}) //숫자와 절대값(=거리)를 묶어서 매핑
                         .min(Comparator.comparing(o -> o[1])) // 절대값(=거리)를 기준으로 정렬하여 최소값을 찾고
                         .orElseThrow()) // 예외가 있으면 던져주고
                 .toArray()[0]; // 값 반환
-
     }
 
     public int triAngleSample02(int[] sides) {
