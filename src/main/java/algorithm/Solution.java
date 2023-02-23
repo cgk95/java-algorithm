@@ -1,5 +1,6 @@
 package algorithm;
 
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -7,7 +8,307 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
-    public int solution(String S) {
+    public String solution(String[] bj, String[] one, String[] two) {
+        HashSet<String> loser=new HashSet<>();
+        StringBuilder sb=new StringBuilder();
+
+        int prize=one.length*150+two.length*300+450;
+        loser.addAll(Arrays.asList(one));
+        loser.addAll(Arrays.asList(two));
+
+        for (String name : bj) {
+            if(!loser.contains(name)){
+                sb.append(name);
+            }
+        }
+        return String.format("%d만원(%s)",prize, sb);
+    }
+    public int opSample02(String s) {
+        String[] target = s.replaceAll("-", " -")
+                .replaceAll("[+]", " ")
+                .split(" ");
+        return Arrays.stream(target).filter(f -> !f.equals(""))
+                .mapToInt(Integer::parseInt).sum();
+    }
+
+    public int 괄호여닫기(String S) {
+        Stack<String> stk = new Stack<>();
+        for (String s : S.split("")) {
+            if ("({[<".contains(s)) {
+                stk.push(s);
+            } else if (!stk.isEmpty()) {
+                Integer x = checkSwitch(stk, s);
+                if (x != null) return x;
+            } else {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    private static Integer checkSwitch(Stack<String> stk, String s) {
+        if (s.equals(")")) {
+            Integer x = checkType(stk, "(");
+            if (x != null) return x;
+        } else if (s.equals("}")) {
+            Integer x = checkType(stk, "{");
+            if (x != null) return x;
+        } else if (s.equals(">")) {
+            Integer x = checkType(stk, "<");
+            if (x != null) return x;
+
+        } else if (s.equals("]")) {
+            Integer x = checkType(stk, "[");
+            if (x != null) return x;
+        }
+        return null;
+    }
+
+    private static Integer checkType(Stack<String> stk, String s) {
+        if (!stk.peek().equals(s)) {
+            return 0;
+        }
+        stk.pop();
+        return null;
+    }
+
+    public String 문자열압축(String s) {
+        int count = 15;
+        while (count > 0) {
+            String[] target = s.split("");
+            for (int i = 0; i < target.length - 1; i++) {
+                if (target[i].equals(target[i + 1])) {
+                    target[i] = target[i + 1] = "";
+                }
+            }
+            s = Arrays.stream(target)
+                    .filter(f -> !f.equals(""))
+                    .collect(Collectors.joining());
+            count--;
+        }
+        return s;
+    }
+
+    public int 영에가장가까운수(int[] orders, int n) {
+        int[] table = new int[1001];
+        int answer = n;
+        for (int i : orders) {
+            table[i] = 1;
+        }
+        for (int i = 1; i < table.length; i++) {
+            if (table[i] == 0) {
+                n--;
+            }
+            if (n == 0) {
+                answer = i;
+                break;
+            }
+        }
+        return answer;
+    }
+
+    public int arrayGCDSample(int[] A) {
+        Integer[] numbers = Arrays.stream(A).boxed().toArray(Integer[]::new);
+        ArrayDeque<Integer> dq = new ArrayDeque<>();
+        for (int i : numbers) {
+            dq.add(i);
+        }
+        while (dq.size() > 1) {
+            dq.addFirst(myGCD(dq.pollFirst(), dq.pollFirst()));
+        }
+        return dq.poll();
+    }
+
+    private Integer myGCD(Integer a, Integer b) {
+        if (a < b) {
+            int tmp = a;
+            a = b;
+            b = tmp;
+        }
+        while (b != 0) {
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+        return a;
+    }
+
+    public String[] stringSample08(String my_str) {
+        String[] filteredString = Arrays.stream(my_str.split(""))
+                .map(s -> {
+                    if (".,!? ".contains(s)) {
+                        s = " ";
+                    }
+                    return s;
+                })
+                .collect(Collectors.joining())
+                .split(" ");
+
+        ArrayList<String> container = new ArrayList<>();
+        for (int i = 0; i < filteredString.length; i++) {
+            if (!filteredString[i].equals("")) {
+                container.add(filteredString[i]);
+            }
+        }
+        String[] answer = container.toArray(String[]::new);
+        for (int i = 0; i < answer.length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = answer[i].length() - 1; j >= 0; j--) {
+                sb.append(answer[i].charAt(j));
+            }
+            answer[i] = sb.toString();
+        }
+        return answer;
+    }
+
+    public String 전광판(int n, String s, int t) {
+        LinkedList<String> deque = new LinkedList<>();
+        for (int i = 0; i < n + s.length(); i++) {
+            if (i < n) {
+                deque.add(".");
+            } else {
+                deque.add(String.valueOf(s.charAt(i - n)));
+            }
+        }
+        int dt = 0;
+        while (dt < t) {
+            deque.addLast(deque.pollFirst());
+            dt++;
+        }
+        StringBuilder sb = new StringBuilder();
+        while (n > 0) {
+            sb.append(deque.pollFirst());
+            n--;
+        }
+        return sb.toString();
+    }
+
+    public int coupledLines(int[][] lines) {
+        int[][] sortedLines = Arrays.stream(lines).sorted(((o1, o2) -> o1[0] - o2[0])).toArray(int[][]::new);
+        System.out.println(Arrays.deepToString(sortedLines));
+        int answer = 0;
+        for (int i = 1; i < sortedLines.length; i++) {
+            int subLine = sortedLines[i - 1][1] - sortedLines[i][0];
+            if (subLine > 0) {
+                answer += subLine;
+            }
+        }
+
+        int[] part1 = new int[]{sortedLines[1][0], sortedLines[0][1]};
+        int[] part2 = new int[]{sortedLines[2][0], sortedLines[1][1]};
+        if (part1[1] - part2[0] > 0) {
+            answer -= (part1[1] - part2[0] + 1);
+        }
+        return answer;
+    }
+
+    public int hashSample(String[] spell, String[] dic) {
+        for (String s : dic) {
+            String[] word = s.split("");
+            HashMap<String, Integer> map = new HashMap<>();
+
+            for (String x : word) {
+                map.computeIfPresent(x, (k, v) -> v + 1);
+                map.putIfAbsent(x, 1);
+            }
+            int count = 0;
+            for (String y : spell) {
+                if (map.containsKey(y) && map.get(y) == 1) {
+                    count++;
+                }
+            }
+            if (count == spell.length) { // 모두 하나씩 쓴게 한 단어라도 있으면
+                return 1;
+            }
+        }
+        return 2;
+    }
+
+    public int checkDigitSample(String my_string) {
+        int answer = 0;
+        ArrayDeque<String> q = new ArrayDeque<>();
+        for (String s : my_string.split("")) {
+            if (isDigit(s)) {
+                q.add(s);
+            }
+            if (!isDigit(s) && !q.isEmpty()) {
+                answer += Integer.parseInt(String.join("", q));
+                q.clear();
+            }
+        }
+        if (!q.isEmpty()) {
+            answer += Integer.parseInt(String.join("", q));
+        }
+        return answer;
+    }
+
+
+    private boolean isDigit(String s) {
+        for (char c : s.toCharArray()) {
+            if (c < 48 || 57 < c) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String stringSample03(String polynomial) {
+        String[] str = polynomial.split(" ");
+        int[] xy = new int[]{0, 0};
+        for (String s : str) {
+            if (s.contains("x")) {
+                if (s.length() == 1) {
+                    xy[0] += 1;
+                } else {
+                    xy[0] += Integer.parseInt(s.replace("x", ""));
+                }
+            } else if (!s.equals("+")) {
+                xy[1] += Integer.parseInt(s);
+            }
+        }
+
+        if (xy[0] == 0) {
+            return String.format("%d", xy[1]);
+        } else if (xy[1] == 0) {
+            return xy[0] != 1 ? String.format("%dx", xy[0]) : "x";
+        } else {
+            return xy[0] != 1 ? String.format("%dx + %d", xy[0], xy[1]) : String.format("x + %d", xy[1]);
+        }
+    }
+
+    public int[] codinationSample(String[] keyinput, int[] board) {
+        int[] answer = {0, 0};
+        for (String s : keyinput) {
+            if (s.equals("up")) {
+                if (answer[1] + 1 <= board[1] / 2) {
+                    answer[1] += 1;
+                }
+            } else if (s.equals("down")) {
+                if (-board[1] / 2 <= answer[1] - 1) {
+                    answer[1] -= 1;
+                }
+
+            } else if (s.equals("left")) {
+                if (answer[0] - 1 >= -(board[0] / 2)) {
+                    answer[0] -= 1;
+                }
+            } else if (s.equals("right")) {
+                if (answer[0] + 1 <= board[0] / 2) {
+                    answer[0] += 1;
+                }
+            }
+        }
+        return answer;
+    }
+
+    public int squareSample(int[][] dots) {
+        int[][] Dots = Arrays.stream(dots).sorted((o1, o2) -> o1[0] - o2[0]).toArray(int[][]::new);
+        int x = Math.abs(Dots[0][1] - Dots[1][1]);
+        int y = Math.abs(Dots[2][0] - Dots[0][0]);
+        return x * y;
+    }
+
+    public int bitSample(String S) {
         int num = Integer.parseInt(S, 2);
         int answer = 0;
         while (num != 0) {
