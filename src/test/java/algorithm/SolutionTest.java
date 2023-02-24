@@ -14,13 +14,13 @@ public class SolutionTest {
     @Test
     @DisplayName("테스트케이스 01")
     void test01() {
-        assertThat(sol.solution(new String[] {"혁준", "하밥", "양상", "심심이", "소스왕"},new String[] {"혁준", "양상"},new String[] {"심심이", "소스왕"})).isEqualTo("1350만원(하밥)");
+        assertThat(sol.solution("Naver")).isEqualTo("nAVER");
     }
 
     @Test
     @DisplayName("테스트케이스 02")
     void test02() {
-//        assertThat(sol.solution("! Sex.,is??Coding")).isEqualTo(new String[] {"xeS","si","gnidoC"});;
+        assertThat(sol.solution("NAAAAAAAAAA")).isEqualTo("naaaaaaaaaa");
     }
 
     @Test

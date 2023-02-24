@@ -8,21 +8,53 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
-    public String solution(String[] bj, String[] one, String[] two) {
-        HashSet<String> loser=new HashSet<>();
-        StringBuilder sb=new StringBuilder();
+    public String solution(String s) {
+        String[] array = s.split("");
+        StringBuilder sb = new StringBuilder();
+        for (String a : array) {
+            char c = a.charAt(0);
+            if (65 <= c && c <= 90) {
+                sb.append(a.toLowerCase());
+            } else if (97 <= c && c <= 122) {
+                sb.append(a.toUpperCase());
+            }
+        }
+        return sb.toString();
+    }
 
-        int prize=one.length*150+two.length*300+450;
+    public String hashSortSample(String s) {
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String a : s.split("")) {
+            map.computeIfPresent(a, (s1, v) -> v + 1);
+            map.putIfAbsent(a, 1);
+        }
+        List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
+        entries.sort((o1, o2) -> {
+            if (o1.getValue().equals(o2.getValue())) {
+                return o1.getKey().compareTo(o2.getKey());
+            }
+            return o1.getValue().compareTo(o2.getValue());
+        });
+
+        return entries.get(0).getKey();
+    }
+
+    public String hashSample02(String[] bj, String[] one, String[] two) {
+        HashSet<String> loser = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+
+        int prize = one.length * 150 + two.length * 300 + 450;
         loser.addAll(Arrays.asList(one));
         loser.addAll(Arrays.asList(two));
 
         for (String name : bj) {
-            if(!loser.contains(name)){
+            if (!loser.contains(name)) {
                 sb.append(name);
             }
         }
-        return String.format("%d만원(%s)",prize, sb);
+        return String.format("%d만원(%s)", prize, sb);
     }
+
     public int opSample02(String s) {
         String[] target = s.replaceAll("-", " -")
                 .replaceAll("[+]", " ")
