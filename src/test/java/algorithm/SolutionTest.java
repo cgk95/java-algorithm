@@ -1,5 +1,6 @@
 package algorithm;
 
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,13 +15,15 @@ public class SolutionTest {
     @Test
     @DisplayName("테스트케이스 01")
     void test01() {
-        assertThat(sol.solution("Naver")).isEqualTo("nAVER");
+        assertThat(sol.옹알이(new String[]{"ayaye", "uuuma", "ye", "yemawoo", "ayaa"}))
+                .isEqualTo(3);
     }
 
     @Test
     @DisplayName("테스트케이스 02")
     void test02() {
-        assertThat(sol.solution("NAAAAAAAAAA")).isEqualTo("naaaaaaaaaa");
+
+//        assertThat(sol.solution(1081)).isEqualTo(120);
     }
 
     @Test

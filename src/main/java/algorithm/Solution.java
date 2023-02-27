@@ -8,7 +8,158 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
-    public String solution(String s) {
+    public int 옹알이(String[] babbling) {
+        int answer = 0;
+        for (String s : babbling) {
+            boolean flag = true;
+            String replaced = s.replace("aya", "-")
+                    .replace("ye", "-")
+                    .replace("woo", "-")
+                    .replace("ma", "-");
+
+            flag = checkAlphabetRemains(flag, replaced);
+            if (flag) {
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    // 알파벳 소문자가 남아있으면 거짓을 반환, 없으면 참을 반환
+    private static boolean checkAlphabetRemains(boolean flag, String replaced) {
+        for (char c : replaced.toCharArray()) {
+            if (97 <= c && c <= 122) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+
+
+    public int[] 몰라(int num, int total) {
+        int[] answer = {};
+        for (int i = -total; i < total; i++) {
+            int count = num - 1;
+            int tmp = 0;
+            while (count >= 0) {
+                tmp += i + count;
+                count--;
+            }
+            if (tmp == total) {
+                answer = makeAnswer(i, num);
+                break;
+            }
+        }
+        return answer;
+    }
+
+    private int[] makeAnswer(int i, int num) {
+        int[] answer = new int[num];
+        for (int j = 0; j < num; j++) {
+            answer[j] = i;
+            i++;
+        }
+        return answer;
+    }
+
+    public int 문자열밀기(String A, String B) {
+        int answer = 0;
+        LinkedList<String> q = new LinkedList<>();
+        for (String s : A.split("")) {
+            q.offer(s);
+        }
+        int count = A.length();
+        while (count > 0) {
+            if (String.join("", q).equals(B)) {
+                return A.length() - count;
+            }
+            q.offerFirst(q.pollLast());
+            count--;
+        }
+        return -1;
+    }
+
+    public String 로그인성공(String[] id_pw, String[][] db) {
+        HashMap<String, String> DB = new HashMap<>();
+        for (String[] str : db) {
+            DB.put(str[0], str[1]);
+        }
+        if (!DB.containsKey(id_pw[0])) {
+            return "fail";
+        }
+        if (!DB.get(id_pw[0]).equals(id_pw[1])) {
+            return "wrong pw";
+        }
+        return "login";
+    }
+
+    public int 치킨쿠폰(int chicken) {
+        int answer = 0;
+        while (chicken >= 10) {
+            answer += chicken / 10;
+            chicken = chicken / 10 + chicken % 10;
+        }
+        return answer;
+    }
+
+    public int[] 성적평균으로정렬(int[][] score) {
+        double[] absoluteScore = Arrays.stream(score)
+                .mapToDouble(o -> (o[0] + o[1]) / 2.0)
+                .toArray();
+        int a = 10;
+        double[] sortedAbsScore = Arrays.stream(absoluteScore).boxed()
+                .sorted(Collections.reverseOrder())
+                .mapToDouble(Double::doubleValue)
+                .toArray();
+
+        double[][] rank = IntStream.range(0, sortedAbsScore.length).mapToObj(i -> new double[]{sortedAbsScore[i], i}).toArray(double[][]::new);
+        for (int i = 1; i < rank.length; i++) {
+            if (rank[i][0] == rank[i - 1][0]) {
+                rank[i][1] = rank[i - 1][1];
+            }
+        }
+
+        HashMap<Double, Double> scoreRankMap = new HashMap<>();
+        for (double[] arr : rank) {
+            scoreRankMap.putIfAbsent(arr[0], arr[1] + 1);
+        }
+
+        int[] answer = new int[score.length];
+        for (int i = 0; i < absoluteScore.length; i++) {
+            answer[i] = scoreRankMap.get(absoluteScore[i]).intValue();
+        }
+        return answer;
+    }
+
+    public int[] weirdSort(int[] numlist, int n) {
+        return Arrays.stream(numlist)
+                .mapToObj(o -> new int[]{Math.abs(n - o), o})
+                .sorted((o1, o2) -> {
+                    if (o1[0] == o2[0]) {
+                        return o2[1] - o1[1];
+                    }
+                    return o1[0] - o2[0];
+                }).mapToInt(o -> o[0]).toArray();
+    }
+
+    public int superPositionLine(int[][] lines) {
+        int[] check = new int[400];
+        int answer = 0;
+        for (int[] arr : lines) {
+            for (int i = arr[0]; i < arr[1]; i++) {
+                check[i + 200]++;
+            }
+        }
+        for (int n : check) {
+            if (n >= 2) {
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    public String 알파벳구별(String s) {
         String[] array = s.split("");
         StringBuilder sb = new StringBuilder();
         for (String a : array) {
