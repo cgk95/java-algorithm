@@ -18,6 +18,11 @@ class 불안정도Test {
                 .isEqualTo(4);
     }
     @Test
+    void test03() {
+        assertThat(sol.solution(new int[] {1,3,4,5,7,9},new int[] {3,2,4,1,1,2},2))
+                .isEqualTo(1);
+    }
+    @Test
     void solution(){
         sol.solution(new int[] {1,3,4,5,7,9},new int[] {3,2,4,1,1,2},2);
     }

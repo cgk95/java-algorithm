@@ -8,6 +8,173 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
+    public double 문자열수식1(String S) {
+        double answer = 0;
+        String[] str=S.replaceAll("[+]", " + ")
+                .replaceAll("-", " - ")
+                .replaceAll("[*]", " * ")
+                .replaceAll("/"," / ").split(" ");
+
+        PriorityQueue<Operation> operation=new PriorityQueue<>();
+        for (String s : str) {
+            if (s.equals("*")) {
+                operation.offer(new Operation(2, s, null));
+            } else if (s.equals("/")) {
+                operation.offer(new Operation(2, s, null));
+            } else if (s.equals("+")) {
+                operation.offer(new Operation(3, s, null));
+            } else if (s.equals("-")) {
+                operation.offer(new Operation(3, s, null));
+            } else { // 숫자인 경우
+                operation.offer(new Operation(1, null, s));
+            }
+        }
+
+        return answer;
+    }
+    class Operation implements Comparable<Operation> {
+        private int priority;
+        private String operator;
+        private String operand;
+
+        public Operation(int priority, String operator, String operand) {
+            this.priority = priority;
+            this.operator = operator;
+            this.operand = operand;
+        }
+
+        public int getPriority() {
+            return priority;
+        }
+
+        public String getOperator() {
+            return operator;
+        }
+
+        public String getOperand() {
+            return operand;
+        }
+
+        @Override
+        public int compareTo(Operation o) {
+            return Integer.compare(this.priority, o.getPriority());
+        }
+    }
+
+    public int 회전뽑기(int N, int K) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= N; i++) {
+            list.add(i);
+        }
+        int pvt = K - 1;
+        while (list.size() > 1) {
+            list.remove(pvt);
+            pvt = (pvt + K - 1) % list.size();
+        }
+        return list.get(0);
+    }
+
+    public int 뒤집어야하는비트갯수(int A, int B) {
+        int XOR = A ^ B;
+        int answer = 0;
+        for (String s : Integer.toBinaryString(XOR).split("")) {
+            if (s.equals("1")) {
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    public int[] 출석부2(int[] nums) {
+        int[] book = new int[nums.length + 1];
+        for (int n : nums) {
+            if (n > book.length) {
+                continue;
+            }
+            book[n]++;
+        }
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 1; i < book.length; i++) {
+            if (book[i] == 0) {
+                arr.add(i);
+            }
+        }
+        int[] answer = new int[arr.size()];
+        for (int i = 0; i < arr.size(); i++) {
+            answer[i] = arr.get(i);
+        }
+        return answer;
+    }
+
+    public int[] 출석부1(int[] nums) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (i + 1 != nums[i]) {
+                arr.add(i + 1);
+            }
+        }
+        int[] answer = new int[arr.size()];
+        for (int i = 0; i < arr.size(); i++) {
+            answer[i] = arr.get(i);
+        }
+        return answer;
+    }
+
+    public String 많이포함된문자열정수(String s) {
+        int[] count = new int[10];
+        for (String k : s.split("")) {
+            count[Integer.parseInt(k)]++;
+        }
+
+        int[] seq = IntStream.range(0, 10)
+                .mapToObj(i -> new int[]{count[i], i})
+                .sorted((o1, o2) -> {
+                    if (o1[0] == o2[0]) {
+                        return o1[1] - o2[1];
+                    }
+                    return o2[0] - o1[0];
+                }).mapToInt(o -> o[1]).toArray();
+
+        String answer = "";
+        for (int sq : seq) {
+            answer += sq;
+            answer += " ";
+        }
+        return answer.stripTrailing();
+    }
+
+    public int 구슬빼내기(int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int answer = -1;
+        for (int n : arr) {
+            map.computeIfPresent(n, (k, v) -> v + 1);
+            map.putIfAbsent(n, 1);
+        }
+        if (!map.containsValue(1)) {
+            answer = 0;
+        } else {
+            for (int k : map.keySet()) {
+                if (map.get(k) == 1) {
+                    answer = k;
+                }
+            }
+        }
+        return answer;
+    }
+
+    public int[] 헉(int[] array, int[][] commands) {
+        int[] answer = new int[commands.length];
+        for (int x = 0; x < commands.length; x++) {
+            int i = commands[x][0];
+            int j = commands[x][1];
+            int k = commands[x][2];
+            answer[x] = IntStream.rangeClosed(i + 1, j + 1)
+                    .map(o -> array[o])
+                    .sorted().toArray()[k - 1];
+        }
+        return answer;
+    }
+
     public int 옹알이(String[] babbling) {
         int answer = 0;
         for (String s : babbling) {

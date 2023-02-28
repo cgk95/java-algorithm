@@ -15,15 +15,15 @@ public class SolutionTest {
     @Test
     @DisplayName("테스트케이스 01")
     void test01() {
-        assertThat(sol.옹알이(new String[]{"ayaye", "uuuma", "ye", "yemawoo", "ayaa"}))
-                .isEqualTo(3);
+        assertThat(sol.문자열수식1("2*3+5/6*3+15"))
+                .isEqualTo(22.50);
     }
 
     @Test
     @DisplayName("테스트케이스 02")
     void test02() {
-
-//        assertThat(sol.solution(1081)).isEqualTo(120);
+//        assertThat(sol.solution(new int[] {1,3,4,8} ))
+//                .isEqualTo(new int[] {2});
     }
 
     @Test

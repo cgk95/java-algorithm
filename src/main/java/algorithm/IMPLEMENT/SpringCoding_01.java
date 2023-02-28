@@ -10,7 +10,7 @@ public class SpringCoding_01 {
     public int solution(int[][] lotteries) {
         int answer = 0;
         // 복권 정렬
-        Object[] sortedLotteries = getSortedLotteries(lotteries);
+        Double[] sortedLotteries = getSortedLotteries(lotteries);
 
         for (int i = 0; i < lotteries.length; i++) {
             if (Objects.equals(lotteries[i], sortedLotteries[0])) {
@@ -21,8 +21,8 @@ public class SpringCoding_01 {
         return answer;
     }
 
-    private static Object[] getSortedLotteries(int[][] lotteries) {
-        Object[] sortedLotteries = Arrays.stream(lotteries).sorted((o1, o2) -> {
+    private static Double[] getSortedLotteries(int[][] lotteries) {
+        Double[] sortedLotteries = Arrays.stream(lotteries).sorted((o1, o2) -> {
             double a1 = o1[0] / (o1[1] + 1.0);
             double a2 = o2[0] / (o2[1] + 1.0);
             if (a1 >= 1.0 && a2 >= 1.0) { // 둘다 100퍼센트 당첨이면
@@ -35,7 +35,7 @@ public class SpringCoding_01 {
             } else {
                 return 1;
             }
-        }).toArray();
+        }).toArray(Double[]::new);
         return sortedLotteries;
     }
 }

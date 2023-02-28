@@ -14,6 +14,7 @@ public class 불안정도 {
         for (int i = 1; i < parent.length; i++) {
             parent[i] = i;
         }
+
         int[] dangerRange = new int[position.length + 1];
         for (int i = 0; i < position.length; i++) {
             dangerRange[i + 1] = position[i] + height[i];
@@ -53,7 +54,7 @@ public class 불안정도 {
             map.putIfAbsent(parent[i], 1);
         }
 
-        List<Map.Entry<Integer, Integer>> entries=map.entrySet()
+        return map.entrySet()
                 .stream()
                 .sorted(((o1, o2) -> {
                     if (o2.getValue() == o1.getValue()) {
@@ -61,7 +62,6 @@ public class 불안정도 {
                     }
                     return o2.getValue() - o1.getValue();
                 })).limit(1).collect(Collectors.toList());
-        return entries;
     }
 
     private int findParent(int[] parent, int k) {
