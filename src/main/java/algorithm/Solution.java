@@ -8,7 +8,33 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
-    public int solution(int n, int price) {
+    public String solution(int[] arr, String prefix, String separator, String postfix) {
+        StringBuilder sb = new StringBuilder(prefix);
+        for (int i = 0; i < arr.length - 1; i++) {
+            sb.append(i).append(separator);
+        }
+        sb.append(arr[arr.length - 1]);
+        sb.append(postfix);
+        return sb.toString();
+    }
+    public int[] 같은숫자찾아서조인(int[] arr1, int[] arr2) {
+        return Arrays.stream(arr1)
+                .filter(f -> arrContains(f, arr2))
+                .sorted()
+                .toArray();
+
+    }
+
+    private boolean arrContains(int n, int[] arr2) {
+        for (int i : arr2) {
+            if (n == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int 플러스1이벤트(int n, int price) {
         int[] answer = new int[n + 1];
         for (int i = 1; i < n + 1; i++) {
             if (i % 10 == 0) {
@@ -26,7 +52,7 @@ public class Solution {
 
     public int kkk() {
         for (int i = 1; i <= 100; i++) {
-            System.out.printf("구입하고 싶은 개수: %d , 구입하면 되는 개수: %d\n", i, solution(i, 1));
+            System.out.printf("구입하고 싶은 개수: %d , 구입하면 되는 개수: %d\n", i, 플러스1이벤트(i, 1));
         }
         return 0;
     }
@@ -58,9 +84,9 @@ public class Solution {
     }
 
     public int n자리의펠린드롬수(int n) {
-        int answer=0;
+        int answer = 0;
         for (int i = (int) Math.pow(10, n - 1); i < Math.pow(10, n); i++) {
-            if(isPalindrome(String.valueOf(i))){
+            if (isPalindrome(String.valueOf(i))) {
                 answer++;
             }
         }
@@ -76,14 +102,18 @@ public class Solution {
         }
         return true;
     }
+
     public long solution(int n) {
-        long[] answer= new long[n+3];
-        answer[1]=10; answer[2]=9; answer[3]=90;
+        long[] answer = new long[n + 3];
+        answer[1] = 10;
+        answer[2] = 9;
+        answer[3] = 90;
         for (int i = 4; i < n + 1; i++) {
 
         }
-        return answer[n] ;
+        return answer[n];
     }
+
     public int 같은거있나보기(int[] arr) {
         int answer = arr.length / 2 + 1;
         arr = Arrays.stream(arr).boxed()
