@@ -15,21 +15,39 @@ public class SolutionTest {
     @Test
     @DisplayName("테스트케이스 01")
     void test01() {
-        assertThat(sol.문자열수식1("2*3+5/6*3+15"))
-                .isEqualTo(22.50);
+        assertThat(sol.n자리의펠린드롬수(8)).isEqualTo(9000);
     }
 
     @Test
     @DisplayName("테스트케이스 02")
     void test02() {
-//        assertThat(sol.solution(new int[] {1,3,4,8} ))
-//                .isEqualTo(new int[] {2});
+        assertThat(sol.n자리의펠린드롬수(9)).isEqualTo(90000);
     }
 
     @Test
     @DisplayName("테스트케이스 03")
     void test03() {
-//        assertThat(sol.solution(new int[][] {{3, 5}, {3, 7}, {12, 4}, {12, 10}})).isEqualTo(1);
+        assertThat(sol.n자리의펠린드롬수(10)).isEqualTo(90000);
+    }
+    @Test
+    @DisplayName("테스트케이스 04")
+    void test04() {
+        assertThat(sol.n자리의펠린드롬수(11)).isEqualTo(90);
+    }
+    @Test
+    @DisplayName("테스트케이스 05")
+    void test05() {
+        assertThat(sol.n자리의펠린드롬수(12)).isEqualTo(900);
+    }
+    @Test
+    @DisplayName("테스트케이스 06")
+    void test06() {
+        assertThat(sol.n자리의펠린드롬수(13)).isEqualTo(900);
+    }
+    @Test
+    @DisplayName("테스트케이스 07")
+    void test07() {
+        assertThat(sol.n자리의펠린드롬수(14)).isEqualTo(9000);
     }
 
 }

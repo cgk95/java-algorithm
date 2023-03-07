@@ -17,7 +17,6 @@ public class Programmers_두자리수찾기 {
     private void myDFS(int[] arr,int depth,int n,int k){
         if(depth==k){
             ArrayList<String> number=new ArrayList<>();
-
             for(int i=0;i<k;i++){
                 number.add(String.valueOf(arr[i]));
             }

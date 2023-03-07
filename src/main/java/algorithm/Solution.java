@@ -8,14 +8,128 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
+    public int solution(int n, int price) {
+        int[] answer = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            if (i % 10 == 0) {
+                answer[i] = i - i / 10 + 1;
+                continue;
+            }
+            if (i % 10 < i / 10) {
+                answer[i] = i / 10 * 10;
+                continue;
+            }
+            answer[i] = n - n / 10;
+        }
+        return answer[n] * price;
+    }
+
+    public int kkk() {
+        for (int i = 1; i <= 100; i++) {
+            System.out.printf("구입하고 싶은 개수: %d , 구입하면 되는 개수: %d\n", i, solution(i, 1));
+        }
+        return 0;
+    }
+
+    public String 피아노치기(String s) {
+        String[] str = s.split("");
+        int hands = 2;
+        for (int i = 0; i < str.length; i++) {
+            if (str[i].equals("1")) {
+                if (i + 1 < str.length) {
+                    if (i + 2 < str.length) {
+                        str[i + 2] = "0";
+                    }
+                    str[i + 1] = "0";
+                }
+                str[i] = "0";
+                hands--;
+            }
+            if (hands < 1) {
+                break;
+            }
+        }
+        for (String p : str) {
+            if (p.equals("1")) {
+                return "NO";
+            }
+        }
+        return "YES";
+    }
+
+    public int n자리의펠린드롬수(int n) {
+        int answer=0;
+        for (int i = (int) Math.pow(10, n - 1); i < Math.pow(10, n); i++) {
+            if(isPalindrome(String.valueOf(i))){
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    private boolean isPalindrome(String arg) {
+        int j = arg.length() - 1;
+        for (int i = 0; i < arg.length() / 2; i++, j--) {
+            if (arg.charAt(i) != arg.charAt(j)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public long solution(int n) {
+        long[] answer= new long[n+3];
+        answer[1]=10; answer[2]=9; answer[3]=90;
+        for (int i = 4; i < n + 1; i++) {
+
+        }
+        return answer[n] ;
+    }
+    public int 같은거있나보기(int[] arr) {
+        int answer = arr.length / 2 + 1;
+        arr = Arrays.stream(arr).boxed()
+                .sorted((o1, o2) -> o2 - o1)
+                .mapToInt(Integer::intValue)
+                .toArray();
+        for (int i = arr.length / 2 + 1; i < arr.length; i++) {
+            if (arr[arr.length / 2] == arr[i]) {
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    public int recursiveSample(int n) {
+        return recursive(n);
+    }
+
+    private int recursive(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        return (recursive(n - 1) * 2 + 1) % 1000000007;
+    }
+
+    public String sol최소힙검증(int[] arr) {
+        for (int i = 1; i <= arr.length; i++) {
+            int index = i * 2;
+            if (index <= arr.length && arr[index - 1] < arr[i - 1]) {
+                return "NO";
+            }
+            if (index + 1 <= arr.length && arr[index] < arr[i - 1]) {
+                return "NO";
+            }
+        }
+        return "YES";
+    }
+
     public double 문자열수식1(String S) {
         double answer = 0;
-        String[] str=S.replaceAll("[+]", " + ")
+        String[] str = S.replaceAll("[+]", " + ")
                 .replaceAll("-", " - ")
                 .replaceAll("[*]", " * ")
-                .replaceAll("/"," / ").split(" ");
+                .replaceAll("/", " / ").split(" ");
 
-        PriorityQueue<Operation> operation=new PriorityQueue<>();
+        PriorityQueue<Operation> operation = new PriorityQueue<>();
         for (String s : str) {
             if (s.equals("*")) {
                 operation.offer(new Operation(2, s, null));
@@ -32,6 +146,7 @@ public class Solution {
 
         return answer;
     }
+
     class Operation implements Comparable<Operation> {
         private int priority;
         private String operator;
@@ -59,6 +174,7 @@ public class Solution {
         public int compareTo(Operation o) {
             return Integer.compare(this.priority, o.getPriority());
         }
+
     }
 
     public int 회전뽑기(int N, int K) {
