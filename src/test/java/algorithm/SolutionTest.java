@@ -15,35 +15,38 @@ public class SolutionTest {
     @Test
     @DisplayName("테스트케이스 01")
     void test01() {
-        assertThat(sol.n자리의펠린드롬수(8)).isEqualTo(9000);
+        assertThat(sol.문제가이상함(15)).isEqualTo(4);
     }
 
     @Test
     @DisplayName("테스트케이스 02")
     void test02() {
-        assertThat(sol.n자리의펠린드롬수(9)).isEqualTo(90000);
+        assertThat(sol.최소비용문열기(new int[][]{{1}, {2, 5}, {7, 10, 1}, {9, 4, 4, 5}})).isEqualTo(11);
     }
 
     @Test
     @DisplayName("테스트케이스 03")
     void test03() {
-        assertThat(sol.n자리의펠린드롬수(10)).isEqualTo(90000);
+        assertThat(sol.solution(new int[]{10})).isEqualTo(new int[]{10});
     }
     @Test
     @DisplayName("테스트케이스 04")
     void test04() {
         assertThat(sol.n자리의펠린드롬수(11)).isEqualTo(90);
     }
+
     @Test
     @DisplayName("테스트케이스 05")
     void test05() {
         assertThat(sol.n자리의펠린드롬수(12)).isEqualTo(900);
     }
+
     @Test
     @DisplayName("테스트케이스 06")
     void test06() {
         assertThat(sol.n자리의펠린드롬수(13)).isEqualTo(900);
     }
+
     @Test
     @DisplayName("테스트케이스 07")
     void test07() {

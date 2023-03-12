@@ -8,7 +8,211 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
-    public String solution(int[] arr, String prefix, String separator, String postfix) {
+    public int[] solution(int[] arr) {
+        if (arr.length == 0) {
+            return new int[]{};
+        }
+        ArrayList<Integer> array = new ArrayList<>();
+        ArrayList<Integer> changes = new ArrayList<>();
+
+        int lastIdxOfBill = -1;
+        for (int i = 0; i < arr.length; i++) {
+            array.add(arr[i]);
+            if (arr[i] / 10 >= 100) {
+                lastIdxOfBill = i;
+            }
+        }
+
+        if (lastIdxOfBill != -1) { // 지폐가 들어왔을 때만
+            changes.add(array.remove(lastIdxOfBill)); // 지폐 반환
+        }
+        int sum = 0;
+        for (int d : array) {
+            sum += d;
+        }
+
+        keepYourChange(changes, sum);
+
+        int[] answer = new int[changes.size()];
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = changes.get(i);
+        }
+        return answer;
+    }
+
+    private static void keepYourChange(ArrayList<Integer> changes, int sum) {
+        for (int i = 0; i < sum / 500; i++) {
+            changes.add(500);
+        }
+        sum = sum % 500;
+        for (int i = 0; i < sum / 100; i++) {
+            changes.add(100);
+        }
+        sum = sum % 100;
+        for (int i = 0; i < sum / 50; i++) {
+            changes.add(50);
+        }
+        sum = sum % 50;
+        for (int i = 0; i < sum / 10; i++) {
+            changes.add(10);
+        }
+
+    }
+
+    public int 양심적인훔치기(int[] A, int K) {
+        Arrays.sort(A);
+        int valueSum = 0;
+        int count = 0;
+        for (int value : A) {
+            if (valueSum + value <= K) {
+                valueSum += value;
+                count++;
+            } else {
+                break;
+            }
+        }
+        return count;
+    }
+
+    public int 최소비용문열기(int[][] A) {
+        for (int i = 1; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                if (j >= 1 && j < A[i].length - 1) {
+                    A[i][j] += Math.min(A[i - 1][j], A[i - 1][j - 1]);
+                } else if (j == 0) {
+                    A[i][j] += A[i - 1][j];
+                } else if (j == A[i].length - 1) {
+                    A[i][j] += A[i - 1][j - 1];
+                }
+            }
+        }
+        // 맨 마지막 결과 배열만 정렬해서
+        Arrays.sort(A[A.length - 1]);
+        return A[A.length - 1][0];
+    }
+
+    public int 삽입해서가장큰수만들기(int N, int K) {
+        StringBuilder sb = new StringBuilder();
+        if (N < 0) {
+            sb.append(N * -1);
+            if (K == 0) {
+                sb.insert(1, K);
+                return Integer.parseInt(sb.toString()) * -1;
+            }
+            // K가 자릿수보다 큰경우 뒤로 작으면 현재 자리에 삽입
+            for (int i = 0; i < sb.length(); i++) {
+                if (K <= Integer.parseInt(String.valueOf(sb.charAt(i)))) {
+                    sb.insert(i, K);
+                    return Integer.parseInt(sb.toString()) * -1;
+                }
+                sb.insert(sb.length() - 1, K);
+                return Integer.parseInt(sb.toString()) * -1;
+            }
+        }
+        // 양수인 경우
+        sb.append(N);
+        if (K == 0) {
+            sb.append(K);
+            return Integer.parseInt(sb.toString());
+        }
+        for (int i = 0; i < sb.length(); i++) {
+            if (K > Integer.parseInt(String.valueOf(sb.charAt(i)))) {
+                sb.insert(i, K);
+                return Integer.parseInt(sb.toString());
+            }
+        }
+        sb.insert(sb.length() - 1, K);
+        return Integer.parseInt(sb.toString());
+    }
+
+    public int 문제가이상함(int n) {
+        int answer = 0;
+        for (int i = 0; i < n + 1; i++) {
+            int sum = 0;
+            for (int j = i; j < n + 1; j++) {
+                sum += j;
+                if (sum == n) {
+                    answer++;
+                    System.out.printf("%d ~ %d\t", i, j);
+                } else if (sum > n) {
+                    break;
+                }
+            }
+        }
+        return answer;
+    }
+
+    public boolean 다리건너기(int[] bridge, int jumpSize) {
+        boolean answer = true;
+        int curr = 0;
+        while (curr < bridge.length - 1) {
+            boolean flag = false;
+            for (int i = curr + jumpSize + 1; i > 0; i--) {
+                if (bridge[i] == 1) {
+                    curr = i;
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                answer = false;
+                break;
+            }
+
+        }
+        return answer;
+    }
+
+
+    int[] dx = new int[]{0, -1, 0, 1};
+    int[] dy = new int[]{-1, 0, 1, 0};
+
+    public int[][] 도시순회(int[][] city) {
+        int[][] answer = new int[city.length][city.length];
+        ArrayList<int[]> busStation = new ArrayList<>();
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city.length; j++) {
+                if (city[i][j] == 0) {
+                    busStation.add(new int[]{i, j});
+                }
+
+            }
+        }
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city.length; j++) {
+                if (city[i][j] == 1) {
+                    answer[i][j] = calculateDistance(i, j, busStation);
+                }
+
+            }
+        }
+        return answer;
+    }
+
+    private int calculateDistance(int i, int j, ArrayList<int[]> busStation) {
+        int answer = Integer.MAX_VALUE;
+        for (int[] arr : busStation) {
+            answer = Math.min(answer, Math.abs(i - arr[0])) + Math.abs(j - arr[1]);
+        }
+        return answer;
+    }
+
+    public int dl이거아님(int[] A) {
+        int answer = 0;
+        Arrays.sort(A);
+        int[] even = IntStream.range(0, A.length / 2).map(i -> A[i]).boxed().sorted((o1, o2) -> o2 - o1).mapToInt(Integer::intValue).toArray();
+        int[] odd = IntStream.range(A.length / 2, A.length).map(i -> A[i]).toArray();
+        for (int i = 0; i < even.length; i++) {
+            answer += -(i + 2) * even[i];
+        }
+        int j = 1;
+        for (int i = 0; i < odd.length; i++, j++) {
+            answer += (i + j) * odd[i];
+        }
+        return answer;
+    }
+
+    public String 앞뒤에붙이기(int[] arr, String prefix, String separator, String postfix) {
         StringBuilder sb = new StringBuilder(prefix);
         for (int i = 0; i < arr.length - 1; i++) {
             sb.append(i).append(separator);
@@ -17,6 +221,7 @@ public class Solution {
         sb.append(postfix);
         return sb.toString();
     }
+
     public int[] 같은숫자찾아서조인(int[] arr1, int[] arr2) {
         return Arrays.stream(arr1)
                 .filter(f -> arrContains(f, arr2))
@@ -101,17 +306,6 @@ public class Solution {
             }
         }
         return true;
-    }
-
-    public long solution(int n) {
-        long[] answer = new long[n + 3];
-        answer[1] = 10;
-        answer[2] = 9;
-        answer[3] = 90;
-        for (int i = 4; i < n + 1; i++) {
-
-        }
-        return answer[n];
     }
 
     public int 같은거있나보기(int[] arr) {
