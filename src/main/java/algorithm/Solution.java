@@ -8,7 +8,84 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
-    public int[] solution(int[] arr) {
+    public long solution(int N, int M, int K, int[] capacity) {
+        long answer = 1;
+        for (int i = 0; i < capacity.length; i++) {
+            int k = capacity[i];
+            answer *= combination(N, k);
+            N -= k;
+        }
+
+        while (M > 0) {
+            answer *= K;
+            K--;
+        }
+        return answer;
+    }
+
+    private int combination(int n, int k) {
+        if (n < k) {
+            return 0;
+        }
+        if (n == k) {
+            return 1;
+        }
+        int x = 1;
+        int y = 1;
+        for (int i = n; i >= n - k + 1; i--) {
+            x *= i;
+        }
+        for (int i = k; i >= 1; i--) {
+            y *= i;
+        }
+
+        return x / y;
+    }
+
+    public int solution(int n, int i, int j) {
+        return divideNConquer(n, i, j);
+    }
+
+    public int divideNConquer(int n, int i, int j) { // 단위 조각이 아니라면 쪼개서 재귀
+        if (n == 0) {
+            return 0;
+        }
+        int half = 1 << (n - 1);
+        int k = 0;
+        if (i >= half) {
+            k += 2;
+            i -= half;
+        }
+        if (j >= half) {
+            k += 1;
+            j -= half;
+        }
+        int subResult = divideNConquer(n - 1, i, j);
+        int addValue = (int) Math.pow(4, n - 1) * k;
+        return subResult + addValue;
+    }
+
+
+    public int n보다작은소수찾기(int n) {
+        boolean[] isPrime = new boolean[n];
+        for (int i = 2; i < n; i++) {
+            int j = 2;
+            while (i * j < n) {
+                isPrime[i * j] = true;
+                j++;
+            }
+        }
+        int answer = 0;
+        for (int b = 2; b < isPrime.length; b++) {
+            if (!isPrime[b]) {
+                System.out.printf("%d\t", b);
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    public int[] 지폐그리디(int[] arr) {
         if (arr.length == 0) {
             return new int[]{};
         }
@@ -323,14 +400,14 @@ public class Solution {
     }
 
     public int recursiveSample(int n) {
-        return recursive(n);
+        return divideNConquer(n);
     }
 
-    private int recursive(int n) {
+    private int divideNConquer(int n) {
         if (n == 1) {
             return 1;
         }
-        return (recursive(n - 1) * 2 + 1) % 1000000007;
+        return (divideNConquer(n - 1) * 2 + 1) % 1000000007;
     }
 
     public String sol최소힙검증(int[] arr) {

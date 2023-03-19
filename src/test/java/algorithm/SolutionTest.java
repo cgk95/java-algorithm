@@ -27,7 +27,7 @@ public class SolutionTest {
     @Test
     @DisplayName("테스트케이스 03")
     void test03() {
-        assertThat(sol.solution(new int[]{10})).isEqualTo(new int[]{10});
+//        assertThat(sol.solution(new String[]{"제로", "베이스", "자바", "스쿨", "자바", "베이스", "베이스", "백엔드", "화이팅"})).isEqualTo(15);
     }
     @Test
     @DisplayName("테스트케이스 04")
