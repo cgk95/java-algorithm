@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.BRUTE_FORCE;
 
 import java.util.Arrays;
 
