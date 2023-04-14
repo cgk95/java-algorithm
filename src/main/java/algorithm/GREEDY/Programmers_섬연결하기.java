@@ -1,36 +1,41 @@
 package algorithm.GREEDY;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Programmers_섬연결하기 {
     public int solution(int n, int[][] costs) {
-        int[][] graph = new int[n + 1][n + 1];
-        for (int i = 0; i < graph.length; i++) {
-            for (int j = 0; j < graph[i].length; j++) {
-                if (i == j) {
-                    graph[i][j] = 0;
-                } else {
-                    graph[i][j] = 99999;
-                }
-            }
-        }
-        for (int[] arr : costs) {
-            int start = arr[0], end = arr[1], cost = arr[2];
-            graph[start][end] = graph[end][start] = cost;
-        }
-        int weight = 0; // 가중치
-        for (int k = 0; k <= n; k++) {
-            for (int i = 0; i <= n; i++) {
-                for (int j = 0; j <= n; j++) {
-                    if (i == 0 && graph[i][j] > graph[i][k] + graph[k][j]) { // 바로 연결이 안되어 있어서 다른 노드를 들렀다 간 경우
-                        weight += graph[i][k]; // 나중에 빼줄 비용 업데이트
-                    }
-                    graph[i][j] = Math.min(graph[i][j], graph[i][k] + graph[k][j]);
-                }
-            }
-        }
+        int[] parent = new int[n];
         int answer = 0;
-        for (int j = 0; j < graph[0].length - 1; j++) {
-            answer += graph[0][j];
+        // 자기 자신을 부모로 초기화
+        for (int i = 0; i < parent.length; i++) {
+            parent[i] = i;
         }
-        return answer - weight;
+        Arrays.sort(costs, Comparator.comparingInt(o -> o[2])); // 최소 비용의 간선들이 먼저 연결되도록
+        for (int[] info : costs) {
+            int start = info[0], end = info[1], cost = info[2];
+            if (findParent(parent, start) != findParent(parent, end)) { // 연결되어 있는 노드인데, 부모가 다르면(아직 서클에 안들어왔으면)
+                unionParent(parent, start, end);
+                answer += cost;
+            } // 이미 연결된 조팝들은 신경쓰지 않는다.
+        }
+        return answer;
+    }
+
+    private int findParent(int[] parent, int a) {
+        if (parent[a] == a) {
+            return a;
+        }
+        return parent[a]=findParent(parent, parent[a]); // 메모이제이션
+    }
+
+    private void unionParent(int[] parent, int a, int b) {
+        a = parent[a];
+        b = parent[b];
+        if (a < b) {
+            parent[b] = a;
+        } else {
+            parent[a] = b;
+        }
     }
 }
