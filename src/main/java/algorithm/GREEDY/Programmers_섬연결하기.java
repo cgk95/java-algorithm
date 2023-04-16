@@ -26,7 +26,7 @@ public class Programmers_섬연결하기 {
         if (parent[a] == a) {
             return a;
         }
-        return parent[a]=findParent(parent, parent[a]); // 메모이제이션
+        return parent[a] = findParent(parent, parent[a]); // 메모이제이션
     }
 
     private void unionParent(int[] parent, int a, int b) {

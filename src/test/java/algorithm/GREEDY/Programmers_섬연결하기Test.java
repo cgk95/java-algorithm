@@ -45,4 +45,8 @@ class Programmers_섬연결하기Test {
     void test09() {
         assertThat(sol.solution(5, new int[][]{{3,0,1},{4,0,1},{1,3,1},{1,2,1},{2,4,7},{4,1,2}})).isEqualTo(4);
     }
+    @Test
+    void test010() {
+        assertThat(sol.solution(4, new int[][]{{0,1,2},{1,3,2},{2,3,2}})).isEqualTo(6);
+    }
 }
