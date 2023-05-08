@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Solution {
+
     public long solution(int N, int M, int K, int[] capacity) {
         long answer = 1;
         for (int i = 0; i < capacity.length; i++) {
