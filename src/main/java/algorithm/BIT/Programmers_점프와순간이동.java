@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.BIT;
 
 public class Programmers_점프와순간이동 {
     public int solution(int n) {
