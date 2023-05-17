@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.TREE;
 
 /**
  * 숫자가 저장된 배열이 존재할 때 해당 배열의 구간 합을 구하거나,
