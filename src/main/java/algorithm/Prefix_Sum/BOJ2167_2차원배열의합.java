@@ -1,4 +1,4 @@
-package algorithm.CUMULATIVE_SUM;
+package algorithm.Prefix_Sum;
 
 import java.util.Arrays;
 import java.util.Scanner;
