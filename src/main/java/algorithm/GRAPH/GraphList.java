@@ -15,8 +15,6 @@ public class GraphList {
     Node[] adjList;
     int elementCount;
 
-    public GraphList() {
-    }
 
     public GraphList(int size) {
         this.vertices = new char[size];
