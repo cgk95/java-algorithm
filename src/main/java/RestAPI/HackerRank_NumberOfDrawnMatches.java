@@ -20,6 +20,7 @@ public class HackerRank_NumberOfDrawnMatches {
         for (int goal = 0; goal <= maxGoal; goal++) {
             totalDrawn += getDrawnNumber(String.format(endPoint + "&team1goals=%d&team2goals=%d", goal, goal));
         }
+
         return totalDrawn;
     }
 

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Trie {
-    static class Node {
+    public static class Node {
         Map<Character, Node> childNode;
         boolean endOfWord;
 
@@ -115,24 +115,24 @@ public class Trie {
         Trie trie= new Trie();
         trie.insert("apple");
         trie.insert("april");
-        trie.insert("app");
-        trie.insert("ace");
-        trie.insert("bear");
-        trie.insert("best");
-        System.out.println(trie.search("apple"));   // true
-        System.out.println(trie.search("april"));   // true
-        System.out.println(trie.search("app"));      // true
-        System.out.println(trie.search("ace"));     // true
-        System.out.println(trie.search("bear"));    // true
-        System.out.println(trie.search("best"));    // true
-        System.out.println(trie.search("abc"));     // false
+//        trie.insert("app");
+//        trie.insert("ace");
+//        trie.insert("bear");
+//        trie.insert("best");
+//        System.out.println(trie.search("apple"));   // true
+        System.out.println(trie.search("pril"));   // true
+//        System.out.println(trie.search("app"));      // true
+//        System.out.println(trie.search("ace"));     // true
+//        System.out.println(trie.search("bear"));    // true
+//        System.out.println(trie.search("best"));    // true
+//        System.out.println(trie.search("abc"));     // false
 
-        System.out.println();
-        trie.delete("apple");
-        System.out.println(trie.search("apple"));   // false
-        System.out.println(trie.search("april"));   // true
-        System.out.println(trie.search("appl"));    // false
-        trie.delete("apple");
+//        System.out.println();
+//        trie.delete("apple");
+//        System.out.println(trie.search("apple"));   // false
+//        System.out.println(trie.search("april"));   // true
+//        System.out.println(trie.search("appl"));    // false
+//        trie.delete("apple");
 
     }
 
