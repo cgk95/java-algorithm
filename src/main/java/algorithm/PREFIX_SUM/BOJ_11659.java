@@ -1,4 +1,4 @@
-package algorithm.Prefix_Sum;
+package algorithm.PREFIX_SUM;
 
 import java.util.ArrayList;
 import java.util.List;
