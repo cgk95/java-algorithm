@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class BOJ15654_N과M5 {
-    static ArrayList<int[]> answer = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
