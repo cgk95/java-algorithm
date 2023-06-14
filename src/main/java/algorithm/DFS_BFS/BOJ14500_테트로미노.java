@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-
 public class BOJ14500_테트로미노 {
 
     private static final int[] dx = {0, 1, 0, -1};  // 북 동 남 서
