@@ -3,7 +3,7 @@
 
 ---
 
-## 입력 받기
+## 1. 입력 받기
 ### Scanner와 BurfferdReader
 
 1) Scanner의 버퍼 크기는 1024 chars, BufferedReader는 8192 chars
@@ -62,8 +62,9 @@ public class Main{
     }
 }
 ```
+---
 
-## ArrayList와 LinkedList
+## 2. ArrayList와 LinkedList
 ```java
 import java.util.ArrayList;
 import java.util.Stack;
@@ -91,8 +92,8 @@ public class Main{
     }
 }
 ```
-
-## Set 콜렉션
+---
+## 3. Set 콜렉션
 
 ```java
 public class Set(){
@@ -125,8 +126,8 @@ public class Set(){
     }
 }
 ```
-
-## Map 컬렉션
+---
+## 4. Map 컬렉션
 
 ```java
 import java.util.*;
@@ -195,8 +196,8 @@ public class 해시 {
     }
 }
 ```
-
-## 정렬
+---
+## 5. 정렬
 
 ```java
 import java.util.*;
@@ -385,8 +386,113 @@ public class Sort {
     }
 }
 ```
+---
+## 6. 순열과 조합
+### 순열 - swap 방식
+```java
+public class PermutationBySwap {
+    void permutation(int[] arr, int depth, int n, int r) {
+        if (depth == r) {
+            for (int i = 0; i < r; i++) {
+                System.out.print(arr[i] + " ");
+            }
+            System.out.println();
+            return;
+        }
 
-## 그래프 탐색
+        for (int i = depth; i < n; i++) {
+            swap(arr, depth, i);
+            permutation(arr, depth + 1, n, r);
+            swap(arr, depth, i);
+        }
+    }
+
+    void swap(int[] arr, int depth, int idx) {
+        int tmp = arr[depth];
+        arr[depth] = arr[idx];
+        arr[idx] = tmp;
+    }
+
+    public static void main(String[] args) {
+//      Test code
+        int[] arr = {1, 2, 3, 4};
+
+        PermutationBySwap p = new PermutationBySwap();
+        p.permutation(arr, 0, 4, 3);
+    }
+}
+```
+### 순열 - 방문체크 방식
+```java
+import java.util.Arrays;
+
+public class PermutationByVisited {
+    void permutation(int[] arr, int depth, int n, int r, boolean[] visited, int[] out) {
+        if (depth == r) {
+            System.out.println(Arrays.toString(out));
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (visited[i] != true) {
+                visited[i] = true;
+                out[depth] = arr[i];
+                permutation(arr, depth + 1, n, r, visited, out);
+                visited[i] = false;
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+//      Test code
+        int[] arr = {1, 2, 3, 4};
+        boolean[] visited = new boolean[4];
+        int[] out = new int[3];
+
+        PermutationByVisited p = new PermutationByVisited();
+        p.permutation(arr, 0, 4, 3, visited, out);
+    }
+}
+
+```
+### 조합
+```java
+public class Combination {
+    void combination(int[] arr, boolean[] visited, int depth, int n, int r) {
+        if (r == 0) {
+            for (int i = 0; i < n; i++) {
+                if (visited[i]) {
+                    System.out.print(arr[i] + " ");
+                }
+            }
+            System.out.println();
+            return;
+        }
+
+        if (depth == n) {
+            return;
+        }
+
+        visited[depth] = true;
+        combination(arr, visited, depth + 1, n, r - 1);
+
+        visited[depth] = false;
+        combination(arr, visited, depth + 1, n, r);
+    }
+    
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4};
+        boolean[] visited = {false, false, false, false};
+
+        Combination c = new Combination();
+        c.combination(arr, visited, 0, 4, 3);
+    }
+}
+```
+---
+
+## 7. 그래프 탐색
 
 ### BFS
 ```java
@@ -396,7 +502,7 @@ import java.util.*;
  * 꼭 기억하기!!!!
  * 큐에 넣을 때부터 미리 방문처리를 해야 해!!!!
  * 큐에서 꺼낼 때에 방문처리를 해버리면 계속 중복해서 또 들어갈 수 있음.
- * 큐에 들어가는 순간 방문처리로 해야 해.
+ * 큐에 들어가는 순간 방문처리로 해야.
  */
 public class Bfs {
 
@@ -445,4 +551,4 @@ public class Dfs {
 }
 ```
 
-## 
+
