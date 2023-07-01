@@ -1,4 +1,4 @@
-package algorithm.DFS_BFS;
+package algorithm.GRAPH.DFS_BFS;
 
 public class Programmers_예상대진표 {
     int round;

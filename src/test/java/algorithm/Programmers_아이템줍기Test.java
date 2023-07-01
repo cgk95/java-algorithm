@@ -1,9 +1,9 @@
 package algorithm;
 
-import algorithm.DFS_BFS.Programmers_아이템줍기;
+import algorithm.GRAPH.DFS_BFS.Programmers_아이템줍기;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class Programmers_아이템줍기Test {
     Programmers_아이템줍기 sol = new Programmers_아이템줍기();

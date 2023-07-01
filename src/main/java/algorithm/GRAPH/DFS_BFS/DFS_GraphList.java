@@ -1,4 +1,6 @@
-package algorithm.GRAPH;
+package algorithm.GRAPH.DFS_BFS;
+
+import algorithm.GRAPH.GraphList;
 
 import java.util.Stack;
 

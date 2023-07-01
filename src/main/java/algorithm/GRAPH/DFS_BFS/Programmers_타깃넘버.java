@@ -1,4 +1,4 @@
-package algorithm.DFS_BFS;
+package algorithm.GRAPH.DFS_BFS;
 
 public class Programmers_타깃넘버 {
     int answer = 0;

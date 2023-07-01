@@ -1,4 +1,4 @@
-package algorithm.DFS_BFS;
+package algorithm.GRAPH.DFS_BFS;
 
 import java.io.BufferedReader;
 import java.io.IOException;

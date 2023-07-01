@@ -1,27 +1,28 @@
-package algorithm.GRAPH;
+package algorithm.GRAPH.DFS_BFS;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import algorithm.GRAPH.GraphMatrix;
 
-public class BFS_GraphMatrix extends GraphMatrix {
-    public BFS_GraphMatrix(int size) {
+import java.util.Stack;
+
+public class DFS_GraphMatrix extends GraphMatrix {
+    public DFS_GraphMatrix(int size) {
         super(size);
     }
 
-    public void bfs(int id) {
+    public void dfs(int id) {
         boolean[] visited = new boolean[this.elementCount];
-        Queue<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
 
-        queue.offer(id);
+        stack.push(id);
         visited[id] = true;
 
-        while (!queue.isEmpty()) {
-            int curId = queue.poll();
+        while (!stack.isEmpty()) {
+            int curId = stack.pop();
             System.out.print(this.vertices[curId] + " ");
 
             for (int i = this.elementCount - 1; i >= 0; i--) {
                 if (this.adjMat[curId][i] == 1 && !visited[i]) {
-                    queue.offer(i);
+                    stack.push(i);
                     visited[i] = true;
                 }
             }
@@ -30,7 +31,7 @@ public class BFS_GraphMatrix extends GraphMatrix {
     }
 
     public static void main(String[] args) {
-        BFS_GraphMatrix graph = new BFS_GraphMatrix(7);
+        DFS_GraphMatrix graph = new DFS_GraphMatrix(7);
         graph.addVertex('A');   // 0
         graph.addVertex('B');   // 1
         graph.addVertex('C');   // 2
@@ -49,6 +50,6 @@ public class BFS_GraphMatrix extends GraphMatrix {
         graph.addEdge(4, 6);
         graph.addEdge(5, 6);
 
-        graph.bfs(0);
+        graph.dfs(0);
     }
 }
