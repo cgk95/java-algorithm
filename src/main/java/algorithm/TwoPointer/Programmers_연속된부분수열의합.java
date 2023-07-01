@@ -7,7 +7,7 @@ public class Programmers_연속된부분수열의합 {
     public int[] solution(int[] sequence, int k) {
         ArrayList<int[]> answer = new ArrayList<>();
         int left = 0, right = 0, rangeSum = sequence[left];
-        while (left <= right ) {
+        while (left <= right) {
             if (rangeSum == k) {
                 answer.add(new int[]{left, right});
                 if (right + 1 == sequence.length) {

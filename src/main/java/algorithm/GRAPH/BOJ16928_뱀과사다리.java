@@ -12,39 +12,39 @@ public class BOJ16928_뱀과사다리 {
         int N = sc.nextInt();
         int M = sc.nextInt();
         sc.nextLine();
-        int[] board=new int[101];
-        int[] dist=new int[101];
+        int[] board = new int[101];
+        int[] dist = new int[101];
         Arrays.fill(dist, -1);
         // 사다리
         for (int i = 0; i < N; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
             sc.nextLine();
-            board[x]=y;
+            board[x] = y;
         }
         // 뱀
         for (int i = 0; i < M; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
             sc.nextLine();
-            board[x]=y;
+            board[x] = y;
         }
         // 연산 시작
         Queue<Integer> q = new LinkedList<>();
         q.offer(1);
-        dist[1]=0;
-        while(!q.isEmpty()){
+        dist[1] = 0;
+        while (!q.isEmpty()) {
             int curr = q.poll();
             for (int i = 1; i <= 6; i++) {
-                int next=curr+i;
+                int next = curr + i;
                 if (next > 100) {
                     continue;
                 }
                 if (board[next] != 0) { // 뱀이나 사다리 있으면
-                    next=board[next];
+                    next = board[next];
                 }
                 if (dist[next] == -1) { // 첫 방문이면
-                    dist[next] = dist[curr]+1; // 주사위 횟수 +1
+                    dist[next] = dist[curr] + 1; // 주사위 횟수 +1
                     q.offer(next); // 이동
                 }
             }

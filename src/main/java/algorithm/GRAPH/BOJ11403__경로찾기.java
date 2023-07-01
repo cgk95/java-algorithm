@@ -28,7 +28,7 @@ public class BOJ11403__경로찾기 {
 
         for (int[] ans : answer) {
             for (int num : ans) {
-                System.out.printf("%d ",num);
+                System.out.printf("%d ", num);
             }
             System.out.println();
         }

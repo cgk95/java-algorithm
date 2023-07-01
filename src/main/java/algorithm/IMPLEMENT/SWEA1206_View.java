@@ -19,7 +19,7 @@ public class SWEA1206_View {
                 int right = getHighstRight(i);
                 compareHeight(i, left, right);
             }
-            System.out.println("#"+test_case+" "+count);
+            System.out.println("#" + test_case + " " + count);
             count = 0; // 카운트 필드를 초기화
         }
     }

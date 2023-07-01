@@ -2,8 +2,9 @@ package algorithm.DFS_BFS;
 
 public class Programmers_타깃넘버 {
     int answer = 0;
+
     public int solution(int[] numbers, int target) {
-        myDfs(numbers,target,0,0);
+        myDfs(numbers, target, 0, 0);
         return answer;
     }
 
@@ -13,10 +14,11 @@ public class Programmers_타깃넘버 {
                 answer++;
             }
         } else {
-            myDfs(numbers,target,index+1,sum+numbers[index]);
-            myDfs(numbers,target,index+1,sum-numbers[index]);
+            myDfs(numbers, target, index + 1, sum + numbers[index]);
+            myDfs(numbers, target, index + 1, sum - numbers[index]);
         }
     }
+
     public static void main(String[] args) {
         Programmers_타깃넘버 sol = new Programmers_타깃넘버();
         System.out.println(sol.solution(new int[]{1, 1, 1, 1, 1}, 3));

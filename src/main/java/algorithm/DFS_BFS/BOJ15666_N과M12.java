@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class BOJ15666_N과M12 {
     static LinkedHashSet<String> answer;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();

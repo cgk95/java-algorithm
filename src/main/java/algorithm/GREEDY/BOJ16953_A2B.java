@@ -8,7 +8,8 @@ public class BOJ16953_A2B { // 2를 곱하거나(2로 나누기) 오른쪽에 1�
     public static void main(String[] args) {
         // 입력
         Scanner sc = new Scanner(System.in);
-        int A = sc.nextInt(); int B = sc.nextInt();
+        int A = sc.nextInt();
+        int B = sc.nextInt();
         sc.close();
         // 연산
         Queue<Node> q = new LinkedList<>();
@@ -17,11 +18,11 @@ public class BOJ16953_A2B { // 2를 곱하거나(2로 나누기) 오른쪽에 1�
         while (!q.isEmpty() && q.peek().index >= A) {
             Node curr = q.poll();
             if (curr.index == A) {
-                System.out.println(curr.minCount+1);
-                flag=true;
+                System.out.println(curr.minCount + 1);
+                flag = true;
                 break;
             }
-            if ((curr.index - 1) % 10 == 0 &&(curr.index - 1) / 10 >= A) {
+            if ((curr.index - 1) % 10 == 0 && (curr.index - 1) / 10 >= A) {
                 q.offer(new Node((curr.index - 1) / 10, curr.minCount + 1));
             }
             if (curr.index % 2 == 0 && curr.index / 2 >= A) {
@@ -33,13 +34,13 @@ public class BOJ16953_A2B { // 2를 곱하거나(2로 나누기) 오른쪽에 1�
         }
     }
 
-    private static class Node{
+    private static class Node {
         int index;
         int minCount;
 
         public Node(int index, int minCount) {
-            this.index=index;
-            this.minCount=minCount;
+            this.index = index;
+            this.minCount = minCount;
         }
     }
 

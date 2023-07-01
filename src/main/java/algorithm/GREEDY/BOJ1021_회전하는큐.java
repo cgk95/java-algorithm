@@ -29,15 +29,15 @@ public class BOJ1021_회전하는큐 implements Application {
                 .mapToInt(Integer::parseInt)
                 .toArray();
         // 연산 시작
-        int j=0;
-        while(j<seq.length){
-            int idxNumber=seq[j];
-            if(!q.isEmpty()) {
+        int j = 0;
+        while (j < seq.length) {
+            int idxNumber = seq[j];
+            if (!q.isEmpty()) {
                 if (q.peek() == idxNumber) { // 뽑고자 하는 위치와 현재 HEAD가 같으면
                     operation1st();
                     j++;            // 다음 순서의 뽑고자 하는 숫자로 이동
                 } else {            // 뽑고자 하는 위치와 현재 HEAD가 다르면
-                    if (q.indexOf(idxNumber)>q.size()-q.indexOf(idxNumber)) {  // 왼쪽으로 움직여 빼는 횟수보다 오른쪽으로 움직여 빼는 횟수가 적으면
+                    if (q.indexOf(idxNumber) > q.size() - q.indexOf(idxNumber)) {  // 왼쪽으로 움직여 빼는 횟수보다 오른쪽으로 움직여 빼는 횟수가 적으면
                         operation3rd();
                     } else {
                         operation2nd();
@@ -45,7 +45,7 @@ public class BOJ1021_회전하는큐 implements Application {
                 }
             }
         }
-        System.out.println(countOp2+countOp3);
+        System.out.println(countOp2 + countOp3);
     }
 
     static private void operation1st() {

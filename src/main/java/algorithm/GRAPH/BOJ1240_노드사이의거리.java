@@ -9,7 +9,9 @@ public class BOJ1240_노드사이의거리 {
     private static int[] distance;
     static ArrayList<int[]>[] graph;
     private static final int INF = Integer.MAX_VALUE;
-    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));;
+    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    ;
+
     public static void main(String[] args) throws IOException {
         // 노드의 개수와 알고 싶은 관계의 수 입력 받기
         String[] inputNM = br.readLine().split(" ");
@@ -24,6 +26,7 @@ public class BOJ1240_노드사이의거리 {
             int end = Integer.parseInt(target[1]);
         }
     }
+
     private static void inputEdgeInfo(BufferedReader br, int N) throws IOException {
         for (int edge = 0; edge < N - 1; edge++) {
             String[] inputEdge = br.readLine().split(" ");
@@ -34,6 +37,7 @@ public class BOJ1240_노드사이의거리 {
             graph[a].add(new int[]{b, cost});
         }
     }
-    private static void myDijkstra(int start){
+
+    private static void myDijkstra(int start) {
     }
 }

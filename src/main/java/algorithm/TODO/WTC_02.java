@@ -6,8 +6,8 @@ public class WTC_02 {
         board[0][0] = 1;
         for (int j = 0; j <= height; j++) {
             for (int i = 0; i <= width; i++) {
-                if(i==0 && j!=0) board[j][i]=1;
-                if(j==0 && i!=0) board[j][i]=1;
+                if (i == 0 && j != 0) board[j][i] = 1;
+                if (j == 0 && i != 0) board[j][i] = 1;
             }
         }
         for (int j = 1; j <= height; j++) {
@@ -15,10 +15,10 @@ public class WTC_02 {
                 int left = 0, down = 0;
                 if (j >= 1) down = board[j - 1][i];
                 if (i >= 1) left = board[j][i - 1];
-                board[j][i] = (left+down) % 10000019 ;
+                board[j][i] = (left + down) % 10000019;
             }
         }
-        return board[height][width]*2;
+        return board[height][width] * 2;
 
     }
 

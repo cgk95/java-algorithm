@@ -8,8 +8,8 @@ public class Programmers_건물의실루엣 {
     public int[][] solution(int[][] buildings) {
         ArrayList<int[]> arrayList = new ArrayList<>();
         Arrays.sort(buildings, Comparator.comparingInt(o -> o[0]));
-        arrayList.add(new int[] {buildings[0][0],buildings[0][2]}); // 시작점
-        for (int i = 1; i < buildings.length-1; i++) {
+        arrayList.add(new int[]{buildings[0][0], buildings[0][2]}); // 시작점
+        for (int i = 1; i < buildings.length - 1; i++) {
             if (buildings[i][0] < buildings[i - 1][0]) {
 
             }

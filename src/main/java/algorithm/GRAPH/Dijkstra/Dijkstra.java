@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- *  방향성을 가지는 그래프에서 최단거리를 구할 때 쓰인다.
- *  즉, 노드 간의 연결된 간선이 방향과 거리 비용을 가지고 있고, 시작 노드에서 다른 노드들까지의 최단거리 비용을 구할 때 사용한다.
+ * 방향성을 가지는 그래프에서 최단거리를 구할 때 쓰인다.
+ * 즉, 노드 간의 연결된 간선이 방향과 거리 비용을 가지고 있고, 시작 노드에서 다른 노드들까지의 최단거리 비용을 구할 때 사용한다.
  */
 public class Dijkstra {
     // INF 값 초기화
@@ -85,11 +85,11 @@ public class Dijkstra {
         int startIndex = Integer.parseInt(br.readLine());
 
         // 그래프 생성
-        for (int i = 0; i < Integer.parseInt(info[0])+1; i++) {
+        for (int i = 0; i < Integer.parseInt(info[0]) + 1; i++) {
             graph.add(new ArrayList<>());
         }
         // 최단거리테이블 생성
-        result = new int[Integer.parseInt(info[0])+1];
+        result = new int[Integer.parseInt(info[0]) + 1];
         // 최단거리테이블 INF로 초기화
         Arrays.fill(result, INF);
 
@@ -107,10 +107,10 @@ public class Dijkstra {
 
         // 문제에서 제시한 조건에 맞게 출력
         for (int i = 1; i < result.length; i++) {
-            if(result[i] == INF) {
+            if (result[i] == INF) {
                 bw.write("INF");
                 bw.newLine();
-            }else {
+            } else {
                 bw.write(String.valueOf(result[i]));
                 bw.newLine();
             }

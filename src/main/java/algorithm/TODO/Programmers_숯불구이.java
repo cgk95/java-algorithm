@@ -31,11 +31,11 @@ public class Programmers_숯불구이 {
                 if (currMVM[0] >= stomachList[i] && stomachList[i] != 0) {
                     currMVM[0] -= stomachList[i];
                     answer += stomachList[i] * currMVM[1];
-                    stomachList[i]=0;
+                    stomachList[i] = 0;
                 } else {
                     stomachList[i] -= currMVM[i];
                     answer += currMVM[i] * currMVM[1];
-                    currMVM[0]=0;
+                    currMVM[0] = 0;
                 }
             }
 

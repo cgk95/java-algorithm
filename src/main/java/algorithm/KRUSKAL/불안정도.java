@@ -32,13 +32,13 @@ public class 불안정도 {
         System.out.println(Arrays.toString(parent));
 
         // m번 만큼 반복
-        while(m>0){
+        while (m > 0) {
             List<Map.Entry<Integer, Integer>> entries = computMaxInstablity(parent);
-            int maxInstablity=entries.get(0).getKey();
+            int maxInstablity = entries.get(0).getKey();
 
             for (int i = 1; i < parent.length; i++) { // 불안정도가 가장 높은 녀석 제거 :: 트리의 깊이가 가장 깊은 녀석을 제거해야
-                if(parent[i]==maxInstablity){
-                    parent[i]=i;
+                if (parent[i] == maxInstablity) {
+                    parent[i] = i;
                 }
             }
             m--;

@@ -19,7 +19,7 @@ public class Programmers_제로지니어스 {
 
     public static void main(String[] args) {
         Programmers_제로지니어스 sol = new Programmers_제로지니어스();
-        System.out.println(sol.solution(new int[] {9, 5, 34, 3, 30}));
-        System.out.println(sol.solution(new int[] {6, 2, 10}));
+        System.out.println(sol.solution(new int[]{9, 5, 34, 3, 30}));
+        System.out.println(sol.solution(new int[]{6, 2, 10}));
     }
 }

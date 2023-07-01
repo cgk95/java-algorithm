@@ -15,7 +15,6 @@ public class BOJ17086_아기상어2 {
     static int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
     static int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
 
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer NM = new StringTokenizer(br.readLine());
@@ -26,51 +25,53 @@ public class BOJ17086_아기상어2 {
             graph[i] = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
         br.close();
+
         int answer = Integer.MIN_VALUE;
-        // 각 아기상어들의 안전 거리 구하기
+
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                if (graph[i][j] != 1) { // 상어가 아니면
+                if (graph[i][j] != 0) {
                     continue;
                 }
-                // 상어를 발견하면
-                answer = Math.max(answer, searchClosestShark(new Node(i, j, 0)));
+                answer = Math.max(answer, searchClosestShark(i, j));
             }
         }
-        System.out.println(answer);
 
+        System.out.println(answer);
     }
 
-    private static int searchClosestShark(Node node) {
+    private static int searchClosestShark(int startX, int startY) {
+        int[][] copyGraph = new int[N][M];
+        for (int i = 0; i < N; i++) {
+            copyGraph[i] = Arrays.copyOf(graph[i], M);
+        }
+
         Queue<Node> q = new LinkedList<>();
         boolean[][] visited = new boolean[N][M];
-        q.offer(node);
-        visited[node.x][node.y] = true;
-        graph[node.x][node.y] = 0;
+        q.offer(new Node(startX, startY, 0));
+        visited[startX][startY] = true;
 
         while (!q.isEmpty()) {
             Node curr = q.poll();
-            if (graph[curr.x][curr.y] == 1) {
-                return curr.dist;
-            }
             for (int k = 0; k < 8; k++) {
                 int nx = curr.x + dx[k];
                 int ny = curr.y + dy[k];
-                if (0 <= nx && 0 <= ny && nx < N && ny < M && !visited[nx][ny]) {
+                if (0 <= nx && nx < N && 0 <= ny && ny < M && !visited[nx][ny]) {
+                    if (copyGraph[nx][ny] == 1) {
+                        return curr.dist + 1;
+                    }
                     q.offer(new Node(nx, ny, curr.dist + 1));
                     visited[nx][ny] = true;
                 }
             }
-
         }
-        graph[node.x][node.y] = 1;
-        return Integer.MIN_VALUE;
+
+        return 0; // 상어를 찾지 못한 경우
     }
 
     static class Node {
         int x;
         int y;
-
         int dist;
 
         public Node(int x, int y, int dist) {

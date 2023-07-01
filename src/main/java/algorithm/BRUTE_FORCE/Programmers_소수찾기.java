@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Programmers_소수찾기 {
     ArrayList<Integer> permutations;
     String[] number;
+
     public int solution(String numbers) {
         number = numbers.split("");
         permutations = new ArrayList<>();

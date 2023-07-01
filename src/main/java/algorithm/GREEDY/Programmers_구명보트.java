@@ -15,9 +15,9 @@ public class Programmers_구명보트 {
             boatPeople.add(kg);
         }
         boatPeople.sort((Comparator.comparingInt(o -> o)));
-        int max=boatPeople.size()-1;
-        int min=0;
-        while(min<=max){
+        int max = boatPeople.size() - 1;
+        int min = 0;
+        while (min <= max) {
             if (boatPeople.get(min) + boatPeople.get(max) <= limit) {
                 answer++;
                 min++;

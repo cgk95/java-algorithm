@@ -1,6 +1,7 @@
 package algorithm.MATH;
 
 import java.util.Scanner;
+
 // 모듈러 연산의 분배법칙을 이용한 분할정복으로 풀이
 // TODO :: 다시 풀어보기
 public class BOJ1629_곱셈 {

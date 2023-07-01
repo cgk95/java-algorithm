@@ -112,7 +112,7 @@ public class Trie {
 
     public static void main(String[] args) {
         // Trie 자료구조 생성
-        Trie trie= new Trie();
+        Trie trie = new Trie();
         trie.insert("apple");
         trie.insert("april");
 //        trie.insert("app");

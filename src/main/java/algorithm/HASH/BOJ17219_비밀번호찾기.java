@@ -11,7 +11,7 @@ public class BOJ17219_비밀번호찾기 {
         int[] input = Arrays.stream(br.readLine().split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
-        HashMap<String,String> password = new HashMap<>();
+        HashMap<String, String> password = new HashMap<>();
         for (int i = 0; i < input[0]; i++) {
             String[] idPw = br.readLine().split(" ");
             password.put(idPw[0], idPw[1]);

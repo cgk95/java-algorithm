@@ -1,4 +1,5 @@
 package algorithm.String;
+
 // FIXME :: 테케 두 개 틀림. 알고리즘 보완 필요
 public class Programmers_N진수게임 {
     public String solution(int n, int t, int m, int p) {

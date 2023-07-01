@@ -9,8 +9,8 @@ package algorithm.IMPLEMENT;
  * 출금시 잔액이 부족하면 잔액만 출금된다.
  */
 public class Naver23_01_복원 {
-    public int[] solution(int unit,int y,String[] info){
+    public int[] solution(int unit, int y, String[] info) {
 
-        return new int[] {};
+        return new int[]{};
     }
 }

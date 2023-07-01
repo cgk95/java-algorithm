@@ -1,4 +1,5 @@
 package algorithm.GRAPH;
+
 // 인접행렬로 그래프 구현
 public class GraphMatrix {
     char[] vertices; // 정점 저장용
@@ -10,6 +11,7 @@ public class GraphMatrix {
         this.adjMat = new int[size][size];
         this.elementCount = 0;
     }
+
     public boolean isFull() {
         return this.elementCount == this.vertices.length;
     }
@@ -25,6 +27,7 @@ public class GraphMatrix {
 
         this.vertices[this.elementCount++] = data;
     }
+
     /**
      * 근접행렬에 표시하여 양방향 간선을 추가하는 메서드
      **/
@@ -32,6 +35,7 @@ public class GraphMatrix {
         this.adjMat[x][y] = 1;
         this.adjMat[y][x] = 1;
     }
+
     /**
      * 근접행렬에 표시하여 단방향 간선을 추가하는 메서드
      **/
@@ -43,6 +47,7 @@ public class GraphMatrix {
         this.adjMat[x][y] = 0;
         this.adjMat[y][x] = 0;
     }
+
     /**
      * 근접행렬에 표시하여 단방향 간선을 제거하는 메서드
      **/
@@ -52,7 +57,7 @@ public class GraphMatrix {
 
     public void printAdjacentMatrix() {
         System.out.print("  ");
-        for (char item: this.vertices) {
+        for (char item : this.vertices) {
             System.out.print(item + " ");
         }
         System.out.println();

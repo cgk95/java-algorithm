@@ -7,6 +7,7 @@ public class Programmers_구슬을나누는경우의수 {
         }
         return myCombination(n - 1, r) + myCombination(n - 1, r - 1);
     }
+
     public int solution(int balls, int share) {
         return myCombination(balls, share);
     }
