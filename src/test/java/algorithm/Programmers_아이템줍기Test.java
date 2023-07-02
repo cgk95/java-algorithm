@@ -1,6 +1,6 @@
 package algorithm;
 
-import algorithm.GRAPH.DFS_BFS.Programmers_아이템줍기;
+import algorithm.GRAPH.BFS.Programmers_아이템줍기;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

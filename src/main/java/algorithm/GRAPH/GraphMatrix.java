@@ -2,9 +2,9 @@ package algorithm.GRAPH;
 
 // 인접행렬로 그래프 구현
 public class GraphMatrix {
-    char[] vertices; // 정점 저장용
-    int[][] adjMat; // 근접 행렬 저장용
-    int elementCount;
+    protected char[] vertices; // 정점 저장용
+    protected int[][] adjMat; // 근접 행렬 저장용
+    protected int elementCount;
 
     public GraphMatrix(int size) {
         this.vertices = new char[size];
