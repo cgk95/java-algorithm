@@ -6,72 +6,83 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class BOJ1753_최단경로 {
-    static int[] dist;
+    static int V, E, K;
     static List<List<Node>> graph;
+    static int[] result;
 
     public static void main(String[] args) throws IOException {
+        graph = new ArrayList<>();
+        getInitialInput();
+        myDijkstra(K);
+        for (int i = 1; i <= V; i++) {
+            if (result[i] == Integer.MAX_VALUE) {
+                System.out.println("INF");
+            } else {
+                System.out.println(result[i]);
+            }
+        }
+    }
+
+    private static void myDijkstra(int K) {
+        PriorityQueue<Node> pq = new PriorityQueue<>(Node::compareTo);
+        pq.offer(new Node(K, 0));
+
+        while (!pq.isEmpty()) {
+            Node curr = pq.poll();
+            if (result[curr.index] < curr.distance) {
+                continue;
+            }
+            for (Node node : graph.get(curr.index)) {
+                if (node.distance + curr.distance < result[node.index]) {
+                    result[node.index] = node.distance + curr.distance;
+                    pq.offer(new Node(node.index, result[node.index]));
+                }
+            }
+        }
+
+    }
+
+
+    public static void getInitialInput() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int[] input = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        int start = Integer.parseInt(br.readLine());
+        V = input[0];
+        E = input[1];
+        K = Integer.parseInt(br.readLine());
 
-        graph = new ArrayList<>();
-        for (int i = 0; i <= input[0]; i++) {
+        result = new int[V + 1];
+        Arrays.fill(result, Integer.MAX_VALUE);
+        result[K] = 0;
+
+        for (int i = 0; i <= V; i++) {
             graph.add(new ArrayList<>());
         }
-        dist = new int[input[0] + 1];
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[start] = 0;
 
-        for (int v = 0; v < input[1]; v++) {
+        for (int i = 0; i < E; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             int w = Integer.parseInt(st.nextToken());
             graph.get(a).add(new Node(b, w));
         }
-        myDijkstra(start);
-        for (int i = 1; i <= input[0]; i++) {
-            if (dist[i] == Integer.MAX_VALUE) {
-                System.out.println("INF");
-            } else {
-                System.out.println(dist[i]);
-            }
-        }
+
+
     }
 
-    private static void myDijkstra(int start) {
-        PriorityQueue<Node> pq = new PriorityQueue<>(Node::compareTo);
-        pq.offer(new Node(start, 0));
-        while (!pq.isEmpty()) {
-            Node curr = pq.poll();
-            int index = curr.index;
-            int distance = curr.weight;
-
-            if (distance > dist[index]) {
-                continue;
-            }
-
-            for (Node linkedNode : graph.get(index)) {
-                if (distance + linkedNode.weight < dist[linkedNode.index]) {
-                    dist[linkedNode.index] = distance + linkedNode.weight;
-                    pq.offer(new Node(linkedNode.index, dist[linkedNode.index]));
-                }
-            }
-        }
-    }
-
-    static class Node implements Comparable<Node> {
+    public static class Node implements Comparable<Node> {
         int index;
-        int weight;
+        int distance;
 
-        public Node(int index, int weight) {
+        public Node(int index, int distance) {
             this.index = index;
-            this.weight = weight;
+            this.distance = distance;
         }
 
         @Override
-        public int compareTo(Node o) {
-            return Integer.compare(this.weight, o.weight);
+        public int compareTo(Node ohter) {
+            return this.distance - ohter.distance;
         }
+
     }
+
 }
