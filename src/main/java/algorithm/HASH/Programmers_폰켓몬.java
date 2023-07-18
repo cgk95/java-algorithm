@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Programmers_폰켓몬 {
     public int solution(int[] nums) {
         HashMap<Integer, Integer> phoneKetMon = new HashMap<>();
-        int numberToChoose=nums.length/2;
+        int numberToChoose = nums.length / 2;
         for (int type : nums) {
             phoneKetMon.computeIfPresent(type, (k, v) -> v + 1);
             phoneKetMon.putIfAbsent(type, 1);

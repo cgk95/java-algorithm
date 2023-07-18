@@ -1,9 +1,9 @@
 package algorithm.GRAPH;
 
 public class GraphList {
-    static class Node {
-        int id;
-        Node next;
+    protected static class Node {
+        public int id;
+        public Node next;
 
         public Node(int id, Node next) {
             this.id = id;
@@ -11,9 +11,9 @@ public class GraphList {
         }
     }
 
-    char[] vertices;
-    Node[] adjList;
-    int elementCount;
+    protected char[] vertices;
+    protected Node[] adjList;
+    protected int elementCount;
 
 
     public GraphList(int size) {

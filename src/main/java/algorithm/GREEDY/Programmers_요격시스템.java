@@ -13,7 +13,7 @@ public class Programmers_요격시스템 {
                 answer++;
                 flag = targets[i][1] - 0.1;
             }
-            flag = Math.min(flag, targets[i][1]-0.1);
+            flag = Math.min(flag, targets[i][1] - 0.1);
         }
         return answer;
     }

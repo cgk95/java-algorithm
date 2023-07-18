@@ -1,6 +1,9 @@
 package algorithm.STACK;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
 
 public class Programmers_주식가격 {
     public int[] solution(int[] prices) {
@@ -12,7 +15,7 @@ public class Programmers_주식가격 {
         while (!q.isEmpty()) {
             int curr = q.poll();
             int count = 0;
-            for(int i : q){
+            for (int i : q) {
                 if (i >= curr) {
                     count++;
                 } else {
@@ -26,7 +29,7 @@ public class Programmers_주식가격 {
     }
 
     public static void main(String[] args) {
-        Programmers_주식가격 sol= new Programmers_주식가격();
+        Programmers_주식가격 sol = new Programmers_주식가격();
         System.out.println(Arrays.toString(sol.solution(new int[]{1, 2, 3, 2, 3})));
     }
 }

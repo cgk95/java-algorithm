@@ -1,6 +1,8 @@
 package algorithm.IMPLEMENT;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class Programmers_나누어떨어지는숫자배열 {
     public int[] solution(int[] arr, int divisor) {
         ArrayList<Integer> answer = new ArrayList<>();
@@ -12,9 +14,9 @@ public class Programmers_나누어떨어지는숫자배열 {
         answer.sort(Integer::compareTo);
         if (!answer.isEmpty()) {
             return Arrays.stream(answer.toArray())
-                    .mapToInt(o->(int)o)
+                    .mapToInt(o -> (int) o)
                     .toArray();
         }
-        return new int[] {};
+        return new int[]{};
     }
 }

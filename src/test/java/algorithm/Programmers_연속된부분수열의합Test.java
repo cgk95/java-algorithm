@@ -1,6 +1,6 @@
 package algorithm;
 
-import algorithm.TwoPointer.Programmers_연속된부분수열의합;
+import algorithm.TWO_POINTER.Programmers_연속된부분수열의합;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

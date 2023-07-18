@@ -1,39 +1,44 @@
 package algorithm.IMPLEMENT;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Stack;
 
 public class 문자열수식계산 {
     private static final HashMap<String, Integer> operator = new HashMap<>();
     private static Stack<String> operationStack;
     private static ArrayList<String> postfix;
-    public 문자열수식계산(){
+
+    public 문자열수식계산() {
         operationStack = new Stack<>();
         postfix = new ArrayList<>();
         setOperator();
     }
+
     public double solution(String S) {
         toPostFixedExpression(getParsedString(S));
         doPostfixOperation();
-        double answer=Double.parseDouble(operationStack.pop());
-        return Math.round(answer*100)/100.0;
+        double answer = Double.parseDouble(operationStack.pop());
+        return Math.round(answer * 100) / 100.0;
     }
 
     private static void doPostfixOperation() {
-        for(String s: postfix){
+        for (String s : postfix) {
             if (!"+-/*?".contains(s)) {
                 operationStack.push(s);
             } else {
-                double b=Double.parseDouble(operationStack.pop());
-                double a=Double.parseDouble(operationStack.pop());
+                double b = Double.parseDouble(operationStack.pop());
+                double a = Double.parseDouble(operationStack.pop());
                 if (s.equals("*")) {
-                    operationStack.push(String.valueOf(a*b));
+                    operationStack.push(String.valueOf(a * b));
                     continue;
                 }
-                if(s.equals("/") && b!=0){
-                    operationStack.push(String.valueOf(a/b));
+                if (s.equals("/") && b != 0) {
+                    operationStack.push(String.valueOf(a / b));
                     continue;
                 }
-                if(s.equals("+")){
+                if (s.equals("+")) {
                     operationStack.push(String.valueOf(a + b));
                     continue;
                 }
@@ -68,7 +73,7 @@ public class 문자열수식계산 {
                 operationStack.push(s);
             }
         }
-        while(!operationStack.isEmpty()){
+        while (!operationStack.isEmpty()) {
             postfix.add(operationStack.pop());
         }
     }

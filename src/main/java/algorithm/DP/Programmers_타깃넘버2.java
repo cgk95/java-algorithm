@@ -22,8 +22,8 @@ public class Programmers_타깃넘버2 {
                 Set<Integer> set1 = dp.get(j);
                 Set<Integer> set2 = dp.get(i - j);
 
-                for (int x: set1) {
-                    for (int y: set2) {
+                for (int x : set1) {
+                    for (int y : set2) {
                         int addVal = x + y;
                         int multVal = x * y;
 
@@ -44,8 +44,6 @@ public class Programmers_타깃넘버2 {
         }
         return -1;
     }
-
-
 
 
     public static void main(String[] args) {
