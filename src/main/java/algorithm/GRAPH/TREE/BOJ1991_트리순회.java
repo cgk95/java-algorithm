@@ -1,4 +1,4 @@
-package algorithm.TREE;
+package algorithm.GRAPH.TREE;
 
 import java.io.BufferedReader;
 import java.io.IOException;
