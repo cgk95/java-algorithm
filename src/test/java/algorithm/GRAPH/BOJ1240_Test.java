@@ -1,5 +1,6 @@
 package algorithm.GRAPH;
 
+import algorithm.GRAPH.BFS.BOJ1240_노드사이의거리;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
