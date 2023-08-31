@@ -1,6 +1,6 @@
 package algorithm.DFS_BFS;
 
-import algorithm.GRAPH.Programmers_퍼즐조각채우기;
+import algorithm.GRAPH.BFS.Programmers_퍼즐조각채우기;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
