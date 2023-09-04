@@ -1,6 +1,5 @@
-package algorithm;
+package algorithm.DSU;
 
-import algorithm.DSU.불안정도;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
