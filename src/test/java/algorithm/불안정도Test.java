@@ -1,6 +1,6 @@
 package algorithm;
 
-import algorithm.KRUSKAL.불안정도;
+import algorithm.DSU.불안정도;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

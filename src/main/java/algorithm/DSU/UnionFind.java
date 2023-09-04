@@ -1,4 +1,4 @@
-package algorithm.KRUSKAL;
+package algorithm.DSU;
 
 import java.util.Arrays;
 
